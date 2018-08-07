@@ -35,6 +35,13 @@ project.ext {
     keyPassword = "yogalian20180806"
 
     supportLibraryVersion = "26.1.0"
+    anko_version='0.10.5'
+    retrofitVersion = "2.4.0"
+    glideVersion = "4.2.0"
+    eventbusVersion = "3.0.0"
+    eventbusProcessorVersion = "3.0.0-beta1"
+    gsonVersion = "2.8.2"
+    cookieVersion = "v1.0.1"
     //maven
 //    snapshotRepositoryUrl = "http://nexus.dev.yunnex.com/nexus/content/repositories/client-snapshots/"
 //    releaseRepositoryUrl = "http://nexus.dev.yunnex.com/nexus/content/repositories/client-release/"
