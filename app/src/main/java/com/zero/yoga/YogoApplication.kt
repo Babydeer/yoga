@@ -7,6 +7,8 @@ import com.facebook.stetho.Stetho
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.DiskLogAdapter
 import com.orhanobut.logger.Logger
+import com.zero.yoga.utils.RudenessScreenHelper
+import com.zero.yoga.utils.RudenessScreenHelperUtils
 import kotlin.properties.Delegates
 
 
@@ -24,6 +26,7 @@ class YogoApplication() : Application() {
         super.onCreate()
         initStetho()
         initLogger()
+        RudenessScreenHelperUtils.initApplication(this)
     }
 
     fun initStetho() {
