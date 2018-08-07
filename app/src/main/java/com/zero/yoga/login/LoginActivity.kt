@@ -16,6 +16,7 @@ class LoginActivity:BaseActivity() {
 
         setContentView(R.layout.activity_main)
         info("LoginActivity onCreate")
+        info { "Longin onCreate" }
         toast("login onCreate")
 
     }

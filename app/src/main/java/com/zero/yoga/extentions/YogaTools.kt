@@ -41,8 +41,8 @@ inline fun <reified T: Any> YogaLogger(): YogaLogger = YogaLogger(T::class.java)
  */
 fun YogaLogger.verbose(message: Any?, thr: Throwable? = null) {
     log(this, message, thr, Log.VERBOSE,
-            { tag, msg -> Log.v(tag, msg) },
-            { tag, msg, thr -> Log.v(tag, msg, thr) })
+            { tag, msg -> Logger.v(tag, msg) },
+            { tag, msg, thr -> Logger.v(tag, msg, thr) })
 }
 
 /**
@@ -58,8 +58,8 @@ fun YogaLogger.verbose(message: Any?, thr: Throwable? = null) {
  */
 fun YogaLogger.debug(message: Any?, thr: Throwable? = null) {
     log(this, message, thr, Log.DEBUG,
-            { tag, msg -> Log.d(tag, msg) },
-            { tag, msg, thr -> Log.d(tag, msg, thr) })
+            { tag, msg -> Logger.d(tag, msg) },
+            { tag, msg, thr -> Logger.d(tag, msg, thr) })
 }
 
 /**
@@ -75,8 +75,8 @@ fun YogaLogger.debug(message: Any?, thr: Throwable? = null) {
  */
 fun YogaLogger.info(message: Any?, thr: Throwable? = null) {
     log(this, message, thr, Log.INFO,
-            { tag, msg -> Log.i(tag, msg) },
-            { tag, msg, thr -> Log.i(tag, msg, thr) })
+            { tag, msg -> Logger.i(tag, msg) },
+            { tag, msg, thr -> Logger.i(tag, msg, thr) })
 }
 
 /**
@@ -92,8 +92,8 @@ fun YogaLogger.info(message: Any?, thr: Throwable? = null) {
  */
 fun YogaLogger.warn(message: Any?, thr: Throwable? = null) {
     log(this, message, thr, Log.WARN,
-            { tag, msg -> Log.w(tag, msg) },
-            { tag, msg, thr -> Log.w(tag, msg, thr) })
+            { tag, msg -> Logger.w(tag, msg) },
+            { tag, msg, thr -> Logger.w(tag, msg, thr) })
 }
 
 /**
@@ -109,8 +109,8 @@ fun YogaLogger.warn(message: Any?, thr: Throwable? = null) {
  */
 fun YogaLogger.error(message: Any?, thr: Throwable? = null) {
     log(this, message, thr, Log.ERROR,
-            { tag, msg -> Log.e(tag, msg) },
-            { tag, msg, thr -> Log.e(tag, msg, thr) })
+            { tag, msg -> Logger.e(tag, msg) },
+            { tag, msg, thr -> Logger.e(tag, msg, thr) })
 }
 
 /**
