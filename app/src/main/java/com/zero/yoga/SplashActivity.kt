@@ -4,6 +4,7 @@ import android.Manifest
 import android.os.Bundle
 import android.os.Handler
 import com.zero.yoga.base.BasePermissionsActivity
+import com.zero.yoga.extentions.error
 import com.zero.yoga.login.LoginActivity
 import org.jetbrains.anko.startActivity
 
@@ -12,11 +13,12 @@ import org.jetbrains.anko.startActivity
  */
 class SplashActivity : BasePermissionsActivity() {
 
-    private val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION)
+    private val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setContentView(R.layout.activity_main)
+        error ("splashActivity onCreate")
         if (checkPermissions(permissions)) {
             val handler = Handler()
             handler.postDelayed({ jumps() }, 1500)

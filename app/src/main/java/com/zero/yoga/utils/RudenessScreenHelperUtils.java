@@ -12,7 +12,7 @@ public class RudenessScreenHelperUtils {
     *  designWidth 设计稿宽度
     *  720*1080
     *  */
-    private static final int designWidth = 360;
+    private static final int designWidth = 750;
 
     public static void initApplication(Application context) {
         new RudenessScreenHelper(context, designWidth).activate();
