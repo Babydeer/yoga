@@ -14,7 +14,7 @@ class LoginActivity:BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
         info("LoginActivity onCreate")
         info { "Longin onCreate" }
         toast("login onCreate")

@@ -4,6 +4,14 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+
+
+def buildTime(){
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd')
+    return formattedDate
+}
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -24,6 +32,31 @@ android {
     lintOptions{
         abortOnError false
     }
+
+
+    applicationVariants.all{ variant ->
+
+        variant.outputs.each { output ->
+
+            if(output.outputFile != null && output.outputFile.name.endsWith('.apk')
+                && 'release'.equals(variant.buildType.name)){
+
+                def flavorName = variant.flavorName.startsWith("_") ? variant.flavorName.
+                        substring(1) : variant.flavorName
+
+                def apkFile = new File(
+                        output.outputFile.getParent(),
+                        "Yoga_${flavorName}_v${variant.versionName}_${buildTime()}.apk"
+                )
+
+                output.outputFile.name = apkFile
+            }
+
+        }
+
+    }
+
+
 
     signingConfigs {
         release {
@@ -53,6 +86,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation "com.android.support:design:$supportLibraryVersion"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
