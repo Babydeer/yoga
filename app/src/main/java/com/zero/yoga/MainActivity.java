@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.utils.BottomNavigationViewHelper;
@@ -69,13 +71,14 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        //禁止ViewPager滑动
-//        viewPager.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                return true;
-//            }
-//        });
+//        禁止ViewPager滑动
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
 
         setupViewPager(viewPager);
     }

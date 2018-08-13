@@ -4,11 +4,11 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
 
-    <dimen name="design_bottom_navigation_margin" tools:override="true">10dp</dimen>
-    <!-- 导航栏高度 -->
-    <dimen name="design_bottom_navigation_height" tools:override="true">84dp</dimen>
+    <!--<dimen name="design_bottom_navigation_margin" tools:override="true">10px</dimen>-->
+    <!--&lt;!&ndash; 导航栏高度 &ndash;&gt;-->
+    <!--<dimen name="design_bottom_navigation_height" tools:override="true">98px</dimen>-->
     <!-- text大小 -->
-    <dimen name="design_bottom_navigation_text_size" tools:override="true">12sp</dimen>
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">13sp</dimen>
     <!-- text大小 -->
-    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">12sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">13sp</dimen>
 </resources>
