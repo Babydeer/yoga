@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/stadiums"
+        android:icon="@drawable/tab_01_normal"
+        android:title="@string/stadium" />
+
+    <item
+        android:id="@+id/mine"
+        android:icon="@drawable/tab_02_normal"
+        android:title="@string/mine" />
+
+</menu>

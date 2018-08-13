@@ -2,8 +2,8 @@ package com.zero.yoga.internet;
 
 import com.trello.rxlifecycle2.RxLifecycle;
 import com.trello.rxlifecycle2.android.ActivityEvent;
-import com.yunnex.commonlib.base.BaseActivity;
-import com.yunnex.commonlib.utils.ProgressDialogUtil;
+import com.zero.yoga.base.BaseActivity;
+import com.zero.yoga.utils.ProgressDialogUtil;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;

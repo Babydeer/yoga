@@ -4,7 +4,6 @@ import android.Manifest
 import android.os.Bundle
 import android.os.Handler
 import com.zero.yoga.base.BasePermissionsActivity
-import com.zero.yoga.extentions.error
 import com.zero.yoga.login.LoginActivity
 import org.jetbrains.anko.startActivity
 
@@ -18,7 +17,6 @@ class SplashActivity : BasePermissionsActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        error ("splashActivity onCreate")
         if (checkPermissions(permissions)) {
             val handler = Handler()
             handler.postDelayed({ jumps() }, 1500)

@@ -10,18 +10,18 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import com.zero.yoga.extentions.YogaLogger
-import com.zero.yoga.extentions.debug
-import com.zero.yoga.extentions.error
+import com.orhanobut.logger.Logger
+
 import java.util.*
 
 /**
  * Created by zero on 2018/8/7.
  */
-abstract class BasePermissionsActivity : BaseActivity(), YogaLogger {
+abstract class BasePermissionsActivity : BaseActivity() {
 
     companion object {
         var REQUEST_CODE_PERMISSION = 0x00099
+        val TAG = "PermAct"
     }
 
 
@@ -30,7 +30,7 @@ abstract class BasePermissionsActivity : BaseActivity(), YogaLogger {
         var packageInfo: PackageInfo? = null
         val list = ArrayList<String>(1)
         try {
-            debug(activity.packageName)
+            Logger.t(TAG).d(activity.packageName)
             packageInfo = activity.packageManager.getPackageInfo(activity.packageName, PackageManager.GET_PERMISSIONS)
         } catch (e: PackageManager.NameNotFoundException) {
             error("A problem occurred when retrieving permissions ${e.localizedMessage}")
@@ -40,7 +40,7 @@ abstract class BasePermissionsActivity : BaseActivity(), YogaLogger {
             val permissions = packageInfo.requestedPermissions
             if (permissions != null) {
                 for (perm in permissions) {
-                    debug("Manifest contained permission:$perm ")
+                    Logger.t(TAG).d("Manifest contained permission:$perm ")
                     list.add(perm)
                 }
             }

@@ -26,7 +26,7 @@ class YogoApplication() : Application() {
         super.onCreate()
         initStetho()
         initLogger()
-        RudenessScreenHelperUtils.initApplication(this)
+//        RudenessScreenHelperUtils.initApplication(this)
     }
 
     fun initStetho() {

@@ -1,6 +1,7 @@
 package com.zero.yoga.internet.interceptor;
 
-import com.yunnex.smartcanteenpad.utils.Config;
+
+import com.zero.yoga.utils.Config;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,10 +1,12 @@
 package com.zero.yoga.internet;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
-import com.yunnex.commonlib.utils.JsonUtil;
-import com.yunnex.commonlib.utils.L;
-import com.yunnex.smartcanteenpad.internet.interceptor.AddCookiesInterceptor;
-import com.yunnex.smartcanteenpad.internet.interceptor.ReceivedCookiesInterceptor;
+import com.orhanobut.logger.Logger;
+import com.zero.yoga.internet.interceptor.AddCookiesInterceptor;
+import com.zero.yoga.internet.interceptor.ReceivedCookiesInterceptor;
+import com.zero.yoga.utils.JsonUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,6 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpUtils {
 
+    private static final String TAG = "HttpUtils";
+
     /**
      * 默认 test-a环境
      */
@@ -28,7 +32,6 @@ public class HttpUtils {
 
     public static void setBaseUrl(String baseUrl) {
         BASE_URL = baseUrl;
-        L.getLogger().tag("Zero").i(baseUrl);
     }
 
     static class HttpLogger implements HttpLoggingInterceptor.Logger {
@@ -49,7 +52,7 @@ public class HttpUtils {
             mMessage.append(message.concat("\n"));
             // 请求或者响应结束，打印整条日志
             if (message.startsWith("<-- END HTTP")) {
-                L.getLogger().tag("Zero").v(mMessage.toString());
+                Logger.t(TAG).d( message);
             }
         }
     }
