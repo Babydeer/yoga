@@ -12,6 +12,12 @@ import com.orhanobut.logger.Logger;
 import com.zero.yoga.MainActivity;
 import com.zero.yoga.R;
 import com.zero.yoga.base.BaseActivity;
+import com.zero.yoga.bean.response.BaseResponse;
+import com.zero.yoga.bean.response.LoginResponse;
+import com.zero.yoga.internet.HttpUtils;
+import com.zero.yoga.internet.RxHelper;
+import com.zero.yoga.internet.RxObserver;
+import com.zero.yoga.internet.YogaAPI;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -87,6 +93,23 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void doLogin() {
+
+        Logger.t("Zero").i("doLogin...");
+        HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).login("18670301864")
+                .compose(new RxHelper<LoginResponse>().io_main(LoginActivity.this, true))
+                .subscribe(new RxObserver<LoginResponse>() {
+                    @Override
+                    public void _onNext(LoginResponse response) {
+                        Logger.t("Zero").i(response.toString());
+
+                    }
+
+                    @Override
+                    public void _onError(String msg) {
+
+                    }
+                });
+
 
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
