@@ -123,6 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="100px"
         android:layout_marginHorizontal="24px"
+        android:layout_marginTop="12px"
         app:tabPaddingBottom="0dp"
         app:tabPaddingEnd="1dp"
         app:tabPaddingStart="1dp"
