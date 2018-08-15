@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="170px"
-    tools:context="com.zero.yoga.stadiums.StadiumDetailsActivity">
+    tools:context="com.zero.yoga.stadiums.StadiumHistoryActivity">
 
     <ImageView
         android:id="@+id/ivIcon"

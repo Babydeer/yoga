@@ -8,6 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.Main" parent="AppTheme" />
+    <style name="TranslucentTheme" parent="AppTheme"></style>
 
 </resources>

@@ -22,6 +22,7 @@ import com.zero.yoga.internet.RxHelper;
 import com.zero.yoga.internet.RxObserver;
 import com.zero.yoga.internet.YogaAPI;
 import com.zero.yoga.utils.InputUtils;
+import com.zero.yoga.utils.StatusBarUtils;
 import com.zero.yoga.utils.ToastUtils;
 
 import org.jetbrains.annotations.Nullable;
@@ -69,6 +70,11 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+//        StatusBarUtils.with(this)
+//                .setIsActionBar(false)
+//                .setDrawable(getResources().getDrawable(R.drawable.shape_status_transparent))
+//                .setColor(R.color.c_00000000)
+//                .init();
 
         tvGetIdentifyCode = findViewById(R.id.tvGetIdentifyCode);
         btnLogin = findViewById(R.id.btnLogin);

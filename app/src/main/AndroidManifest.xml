@@ -25,7 +25,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/yogachain_ic"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.Main">
+        android:theme="@style/TranslucentTheme">
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
