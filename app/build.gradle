@@ -120,9 +120,9 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     //稳定的
-    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
-    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
-    implementation "com.github.bumptech.glide:okhttp3-integration:$rootProject.glideVersion"
+//    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+//    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+//    implementation "com.github.bumptech.glide:okhttp3-integration:$rootProject.glideVersion"
     implementation "org.greenrobot:eventbus:$rootProject.eventbusVersion"
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
     implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
@@ -136,6 +136,6 @@ dependencies {
 
     implementation 'com.zhy:autolayout:1.4.5'
 
-    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
 
 }

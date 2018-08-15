@@ -7,9 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.orhanobut.logger.Logger;
 import com.zero.yoga.R;
 import com.zero.yoga.base.BaseLazyFragment;
+import com.zero.yoga.stadiums.StadiumHistoryActivity;
+import com.zero.yoga.utils.GlideCircleTransform;
 
 /**
  * Created by zero on 2018/8/13.
@@ -72,6 +75,11 @@ public class MineFragment extends BaseLazyFragment {
             }
         });
 
+
+//        Glide.with(getActivity()).load("url").placeholder(R.mipmap.yogachain_ic)
+//                .crossFade()
+//                .transform(new GlideCircleTransform(getActivity()))
+//                .into(ivIcon);
         return root;
     }
 
@@ -83,13 +91,16 @@ public class MineFragment extends BaseLazyFragment {
 
     private void onMyCourseList() {
         Logger.t(TAG).i("onMyCourseList");
+        StadiumHistoryActivity.jump2StadiumHistoryActivity(getActivity());
     }
 
     private void onFeedBack() {
         Logger.t(TAG).i("onFeedBack");
+        FeedBackActivity.jump2FeedBackActivity(getActivity());
     }
 
     private void onAbout() {
         Logger.t(TAG).i("onAbout");
+        AboutActivity.jump2AboutActivity(getActivity());
     }
 }
