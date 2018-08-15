@@ -35,6 +35,7 @@
         </activity>
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".stadiums.StadiumDetailsActivity" />
 
         <meta-data
             android:name="design_width"
@@ -42,6 +43,16 @@
         <meta-data
             android:name="design_height"
             android:value="1334" />
+
+        <provider
+            android:name=".utils.YogaFileProvider"
+            android:authorities="${packageName}.util.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/yoga_file_paths" />
+        </provider>
     </application>
 
 </manifest>

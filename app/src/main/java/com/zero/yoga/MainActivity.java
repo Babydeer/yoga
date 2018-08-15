@@ -7,8 +7,12 @@ import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.zero.yoga.base.BaseActivity;
+import com.zero.yoga.mine.MineFragment;
+import com.zero.yoga.stadiums.StadiumFragment;
 import com.zero.yoga.utils.BottomNavigationViewHelper;
 import com.zero.yoga.view.TestFragment;
 
@@ -24,12 +28,21 @@ public class MainActivity extends BaseActivity {
     private MenuItem menuItem;
     private BottomNavigationView bottomNavigationView;
 
+    private TextView tvTitle;
+
+    private ImageView ivSearch;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        viewPager =  findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
+        tvTitle = findViewById(R.id.tvTitle);
+        ivSearch = findViewById(R.id.ivSearch);
+
+        tvTitle.setText("场馆");
+
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         //默认 >3 的选中效果会影响ViewPager的滑动切换时的效果，故利用反射去掉
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -40,9 +53,13 @@ public class MainActivity extends BaseActivity {
                         switch (item.getItemId()) {
                             case R.id.stadiums:
                                 viewPager.setCurrentItem(0);
+                                tvTitle.setText("场馆");
+                                ivSearch.setVisibility(View.VISIBLE);
                                 break;
                             case R.id.mine:
                                 viewPager.setCurrentItem(1);
+                                tvTitle.setText("个人中心");
+                                ivSearch.setVisibility(View.INVISIBLE);
                                 break;
                         }
                         return false;
@@ -86,8 +103,8 @@ public class MainActivity extends BaseActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(TestFragment.newInstance("场馆"));
-        adapter.addFragment(TestFragment.newInstance("我"));
+        adapter.addFragment(StadiumFragment.newInstance());
+        adapter.addFragment(MineFragment.newInstance());
         viewPager.setAdapter(adapter);
     }
 }

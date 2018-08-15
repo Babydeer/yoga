@@ -1,9 +1,14 @@
 package com.zero.yoga.mine;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
+import com.zero.yoga.R;
 import com.zero.yoga.base.BaseLazyFragment;
+import com.zero.yoga.stadiums.StadiumFragment;
+import com.zero.yoga.stadiums.StadiumListFragment;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -13,9 +18,20 @@ import org.jetbrains.annotations.Nullable;
 
 public class MineFragment extends BaseLazyFragment {
 
+
+    public static MineFragment newInstance() {
+//        Bundle args = new Bundle();
+        MineFragment fragment = new MineFragment();
+//        fragment.setArguments(args);
+        return fragment;
+    }
+
+
+    @android.support.annotation.Nullable
     @Override
-    public void onViewCreated(@Nullable View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, @android.support.annotation.Nullable ViewGroup container, @android.support.annotation.Nullable Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_mine, container, false);
+        return root;
     }
 
     @Override

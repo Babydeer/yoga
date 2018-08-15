@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.zero.yoga.stadiums.StadiumDetailsActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:paddingEnd="40px"
+            android:src="@drawable/nav_ic_back" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="详情"
+            android:textColor="#121212"
+            android:textSize="18sp" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="174px"
+        android:layout_marginBottom="18px"
+        android:layout_marginHorizontal="24px"
+        android:layout_marginTop="26px">
+
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="180px"
+            android:layout_height="180px"
+            android:layout_alignParentStart="true"
+            android:src="@mipmap/yogachain_ic" />
+
+        <TextView
+            android:id="@+id/tvStadiumName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivIcon"
+            android:layout_marginStart="20px"
+            android:layout_marginTop="12px"
+            android:layout_toEndOf="@+id/ivIcon"
+            android:textColor="#333333"
+            android:textSize="15sp"
+            tools:text="紫音瑜伽馆" />
+
+        <TextView
+            android:id="@+id/tvStadiumTel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvStadiumName"
+            android:layout_marginStart="20px"
+            android:layout_marginTop="20px"
+            android:layout_toEndOf="@+id/ivIcon"
+            android:drawableLeft="@drawable/list_ic_tel"
+            android:drawablePadding="8px"
+            android:textColor="#505050"
+            android:textSize="12sp"
+            tools:text="18670301864" />
+
+        <TextView
+            android:id="@+id/tvStadiumLoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvStadiumName"
+            android:layout_marginStart="60px"
+            android:layout_marginTop="20px"
+            android:layout_toEndOf="@+id/tvStadiumTel"
+            android:drawableLeft="@drawable/list_ic_location"
+            android:drawablePadding="8px"
+            android:textColor="#505050"
+            android:textSize="12sp"
+            tools:text="宝安中心区 10Km以内" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tvStadiumTel"
+            android:layout_marginStart="20px"
+            android:layout_marginTop="20px"
+            android:layout_toEndOf="@+id/ivIcon"
+            android:background="#eeeeee" />
+
+        <TextView
+            android:id="@+id/tvStadiumDis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ivIcon"
+            android:layout_marginStart="20px"
+            android:layout_toEndOf="@+id/ivIcon"
+            android:drawableLeft="@drawable/list_ic_time"
+            android:drawablePadding="8px"
+            android:textColor="#808080"
+            android:textSize="10sp"
+            tools:text="营业时间 9:00 - 22:00" />
+
+    </RelativeLayout>
+
+
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl"
+        android:layout_width="match_parent"
+        android:layout_height="100px"/>
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/xrecycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="24px"
+        android:scrollbars="none" />
+
+</com.zhy.autolayout.AutoLinearLayout>

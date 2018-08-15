@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100px"
+    android:orientation="vertical"
+    tools:context="com.zero.yoga.MainActivity">
+
+    <TextView
+        android:id="@+id/tvMonth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22px"
+        android:gravity="center"
+        android:textColor="#333333"
+        android:textSize="12sp"
+        tools:text="08-14" />
+
+    <TextView
+        android:id="@+id/tvWeek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22px"
+        android:layout_marginTop="2px"
+        android:gravity="center"
+        android:textColor="#333333"
+        android:textSize="10sp"
+        tools:text="星期二" />
+
+
+</com.zhy.autolayout.AutoLinearLayout>

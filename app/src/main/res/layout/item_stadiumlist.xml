@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="174px"
+    tools:context="com.zero.yoga.MainActivity">
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="116px"
+        android:layout_height="116px"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/yogachain_ic" />
+
+    <TextView
+        android:id="@+id/tvStadiumName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivIcon"
+        android:layout_marginStart="40px"
+        android:layout_toEndOf="@+id/ivIcon"
+        android:textColor="#333333"
+        android:textSize="15sp"
+        tools:text="紫音瑜伽馆" />
+
+    <TextView
+        android:id="@+id/tvStadiumAddr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvStadiumName"
+        android:layout_marginStart="40px"
+        android:layout_marginTop="10px"
+        android:layout_toEndOf="@+id/ivIcon"
+        android:textColor="#505050"
+        android:textSize="12sp"
+        tools:text="南山区科技园建设路453号琴音大厦" />
+
+    <TextView
+        android:id="@+id/tvStadiumDis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivIcon"
+        android:layout_marginStart="40px"
+        android:layout_toEndOf="@+id/ivIcon"
+        android:textColor="#808080"
+        android:textSize="10sp"
+        tools:text="南油 &#060; 500m" />
+
+
+</com.zhy.autolayout.AutoRelativeLayout>
