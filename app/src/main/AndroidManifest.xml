@@ -36,6 +36,9 @@
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".stadiums.StadiumDetailsActivity" />
+        <activity android:name=".mine.FeedBackActivity" />
+        <activity android:name=".stadiums.StadiumHistoryActivity" />
+        <activity android:name=".mine.UserCenterActivity" />
 
         <meta-data
             android:name="design_width"

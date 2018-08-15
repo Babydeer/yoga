@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="170px"
+    tools:context="com.zero.yoga.stadiums.StadiumDetailsActivity">
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="116px"
+        android:layout_height="116px"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/yogachain_ic" />
+
+    <TextView
+        android:id="@+id/tvCourseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivIcon"
+        android:layout_marginStart="30px"
+        android:layout_toEndOf="@+id/ivIcon"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        tools:text="户外瑜伽" />
+
+    <ImageView
+        android:id="@+id/ivQian"
+        android:layout_width="36px"
+        android:layout_height="36px"
+        android:layout_alignTop="@+id/ivIcon"
+        android:layout_marginStart="20px"
+        android:layout_toEndOf="@+id/tvCourseName"
+        android:src="@drawable/list_ic_qian" />
+
+    <TextView
+        android:id="@+id/tvCourseTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCourseName"
+        android:layout_marginStart="30px"
+        android:layout_marginTop="20px"
+        android:layout_toEndOf="@+id/ivIcon"
+        android:textColor="#505050"
+        android:textSize="12sp"
+        tools:text="9:00 - 22:00" />
+
+    <TextView
+        android:id="@+id/tvCoachName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivIcon"
+        android:layout_marginStart="30px"
+        android:layout_toEndOf="@+id/ivIcon"
+        android:textColor="#808080"
+        android:textSize="10sp"
+        tools:text="Krishna Kumari" />
+
+    <TextView
+        android:id="@+id/tvStudentNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivIcon"
+        android:layout_marginStart="20px"
+        android:layout_toEndOf="@+id/tvCoachName"
+        android:textColor="#808080"
+        android:textSize="10sp"
+        tools:text="62人" />
+
+
+    <Button
+        android:id="@+id/btnSubscribe"
+        android:layout_width="95px"
+        android:layout_height="50px"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/shape_button_subscribe"
+        android:text="预约"
+        android:textColor="#ffffff"
+        android:textSize="12sp" />
+
+
+</com.zhy.autolayout.AutoRelativeLayout>

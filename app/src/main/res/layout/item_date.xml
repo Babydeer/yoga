@@ -1,31 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="100px"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="1dp"
+    android:background="#f5f5f5"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.zero.yoga.MainActivity">
+    android:padding="0dp"
+    tools:context="com.zero.yoga.stadiums.StadiumDetailsActivity">
 
     <TextView
         android:id="@+id/tvMonth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="0dp"
         android:layout_marginTop="22px"
         android:gravity="center"
+        android:padding="0dp"
         android:textColor="#333333"
-        android:textSize="12sp"
+        android:textSize="10sp"
         tools:text="08-14" />
 
     <TextView
         android:id="@+id/tvWeek"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="0dp"
         android:layout_marginBottom="22px"
         android:layout_marginTop="2px"
         android:gravity="center"
+        android:padding="0dp"
         android:textColor="#333333"
-        android:textSize="10sp"
+        android:textSize="8sp"
         tools:text="星期二" />
 
 

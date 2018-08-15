@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
@@ -14,10 +16,13 @@ import com.zero.yoga.R;
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.bean.response.BaseResponse;
 import com.zero.yoga.bean.response.LoginResponse;
+import com.zero.yoga.bean.response.SendSmsResponse;
 import com.zero.yoga.internet.HttpUtils;
 import com.zero.yoga.internet.RxHelper;
 import com.zero.yoga.internet.RxObserver;
 import com.zero.yoga.internet.YogaAPI;
+import com.zero.yoga.utils.InputUtils;
+import com.zero.yoga.utils.ToastUtils;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -33,6 +38,9 @@ public class LoginActivity extends BaseActivity {
 
     private TextView tvGetIdentifyCode;
     private Button btnLogin;
+
+    private EditText etPhoneNo;
+    private EditText etIdentifyCode;
 
     private int mCount = 60;
 
@@ -64,14 +72,22 @@ public class LoginActivity extends BaseActivity {
 
         tvGetIdentifyCode = findViewById(R.id.tvGetIdentifyCode);
         btnLogin = findViewById(R.id.btnLogin);
+        etPhoneNo = findViewById(R.id.etPhoneNo);
+        etIdentifyCode = findViewById(R.id.etIdentifyCode);
 
         tvGetIdentifyCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final String phoneNo = etPhoneNo.getText().toString().trim();
+
+                if (TextUtils.isEmpty(phoneNo) || !InputUtils.isPhone(phoneNo)) {
+                    ToastUtils.showShortToast("手机号码格式不对");
+                    return;
+                }
 
                 if (mCount == 60) {
                     mCount--;
-                    doGetIndentifyCode();
+                    doGetIndentifyCode(phoneNo);
                     mHandler.sendEmptyMessageDelayed(COUNT_TV, 1000);
                 }
 
@@ -88,20 +104,14 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    private void doGetIndentifyCode() {
+    private void doGetIndentifyCode(final String phoneNo) {
         Logger.t(TAG).d("获取验证码...");
-    }
-
-    private void doLogin() {
-
-        Logger.t("Zero").i("doLogin...");
-        HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).login("18670301864")
-                .compose(new RxHelper<LoginResponse>().io_main(LoginActivity.this, true))
-                .subscribe(new RxObserver<LoginResponse>() {
+        HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).sendSmsCode(phoneNo)
+                .compose(new RxHelper<SendSmsResponse>().io_main(LoginActivity.this, true))
+                .subscribe(new RxObserver<SendSmsResponse>() {
                     @Override
-                    public void _onNext(LoginResponse response) {
+                    public void _onNext(SendSmsResponse response) {
                         Logger.t("Zero").i(response.toString());
-
                     }
 
                     @Override
@@ -109,6 +119,11 @@ public class LoginActivity extends BaseActivity {
 
                     }
                 });
+    }
+
+    private void doLogin() {
+
+        Logger.t("Zero").i("doLogin...");
 
 
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);

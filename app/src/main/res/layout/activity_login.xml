@@ -85,7 +85,7 @@
             android:src="@drawable/login_ic_02" />
 
         <EditText
-            android:id="@+id/etPassWord"
+            android:id="@+id/etIdentifyCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -109,7 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="80px"
         android:layout_marginHorizontal="24px"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="120px"
         android:background="@drawable/shape_button_circular"
         android:text="登录"
         android:textColor="#ffffff"

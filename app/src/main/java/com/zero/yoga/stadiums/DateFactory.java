@@ -20,7 +20,7 @@ public class DateFactory {
             SimpleDateFormat sFmt1 = new SimpleDateFormat("MM-dd");
             SimpleDateFormat sFmt2 = new SimpleDateFormat("E");
             SimpleDateFormat sFmt3 = new SimpleDateFormat("yyyy-MM-dd");
-            calendar.add(Calendar.DAY_OF_WEEK_IN_MONTH, i);
+            calendar.add(Calendar.DAY_OF_WEEK, 1);
             Date datei = calendar.getTime();
             DateBean dateBean = new DateBean(sFmt1.format(datei), sFmt2.format(datei), sFmt3.format(datei), calendar.getTimeInMillis());
             result.add(dateBean);

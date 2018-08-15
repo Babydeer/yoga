@@ -1,6 +1,7 @@
 package com.zero.yoga.internet;
 
 import com.zero.yoga.bean.response.LoginResponse;
+import com.zero.yoga.bean.response.SendSmsResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -15,6 +16,6 @@ public interface YogaAPI {
 
     @POST("auth/sendSmsCode")
     @FormUrlEncoded
-    Observable<LoginResponse> login(@Field("phoneNo") String phoneNo);
+    Observable<SendSmsResponse> sendSmsCode(@Field("phoneNo") String phoneNo);
 
 }

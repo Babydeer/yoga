@@ -6,4 +6,11 @@
 
     <color name="tab_checked">#121212</color>
     <color name="tab_unchecked">#666666</color>
+
+
+    <color name="c_121212">#121212</color>
+    <color name="c_666666">#666666</color>
+    <color name="c_f5f5f5">#f5f5f5</color>
+    <color name="c_333333">#333333</color>
+    <color name="c_ffffff">#ffffff</color>
 </resources>

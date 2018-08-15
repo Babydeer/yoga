@@ -1,20 +1,11 @@
-package com.zero.yoga.stadiums;
+package com.zero.yoga.mine;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,13 +13,10 @@ import android.widget.TextView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.orhanobut.logger.Logger;
 import com.zero.yoga.R;
-import com.zero.yoga.ViewPagerAdapter;
-import com.zero.yoga.adapter.DatesAdapter;
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.base.TBaseRecyclerAdapter;
-import com.zero.yoga.mine.MineFragment;
-import com.zero.yoga.utils.BottomNavigationViewHelper;
-import com.zero.yoga.utils.ItemClickSupport;
+import com.zero.yoga.stadiums.DateBean;
+import com.zero.yoga.stadiums.DateFactory;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -38,7 +26,7 @@ import java.util.List;
  * Created by zero on 2018/8/13.
  */
 
-public class StadiumDetailsActivity extends BaseActivity {
+public class FeedBackActivity extends BaseActivity {
 
     private static final String TAG = "StadiumDetails";
 
@@ -57,8 +45,8 @@ public class StadiumDetailsActivity extends BaseActivity {
     private List<DateBean> tabs;
     private TBaseRecyclerAdapter datesAdapter;
 
-    public static void jump2StadiumDetailsActivity(final Context context) {
-        Intent intent = new Intent(context, StadiumDetailsActivity.class);
+    public static void jump2FeedBackActivity(final Context context) {
+        Intent intent = new Intent(context, FeedBackActivity.class);
         context.startActivity(intent);
     }
 
@@ -66,7 +54,7 @@ public class StadiumDetailsActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_statium_details);
+        setContentView(R.layout.activity_feedback);
         ivBack = findViewById(R.id.ivBack);
         tvTitle = findViewById(R.id.tvTitle);
 
@@ -80,7 +68,7 @@ public class StadiumDetailsActivity extends BaseActivity {
         xrecyclerView = findViewById(R.id.xrecycler_view);
         initXRecyclerView();
 
-        tvTitle.setText("详情");
+        tvTitle.setText("意见反馈");
         initTabLayout();
 
     }
