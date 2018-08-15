@@ -25,8 +25,8 @@ public class RxObserver<T extends BaseResponse> implements Observer<T> {
     }
 
     @Override
-    public void onNext(BaseResponse t) {
-
+    public void onNext(T t) {
+        _onNext(t);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class RxObserver<T extends BaseResponse> implements Observer<T> {
     }
 
 
-    public void _onNext(BaseResponse t) {
+    public void _onNext(T t) {
     }
 
     public void _onError(String msg) {

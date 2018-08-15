@@ -27,7 +27,7 @@ public class HttpUtils {
     /**
      * 默认 test-a环境
      */
-    public static String BASE_URL = "http://cyapi.test-a.saofu.cn/";
+    public static String BASE_URL = "http://120.79.17.189:8888/";
 
 
     public static void setBaseUrl(String baseUrl) {
