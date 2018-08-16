@@ -72,34 +72,18 @@ public class StadiumListFragment extends BaseLazyFragment {
         xrecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         xrecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
         xrecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST));
-        xrecyclerView.setAdapter(testAdapter);
 
-        data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            data.add("test: " + i);
-        }
-
-        testAdapter.setDataList(data);
 
         xrecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                data.clear();
-                for (int i = 0; i < 10; i++) {
-                    data.add("test: " + i);
-                }
-                testAdapter.setDataList(data);
                 mCurrIndex = 1;
                 prepareFetchData(true);
             }
 
             @Override
             public void onLoadMore() {
-                for (int i = data.size(); i < 10; i++) {
-                    data.add("test: " + i);
-                }
-                testAdapter.addDataList(data);
-                prepareFetchData();
+                prepareFetchData(true);
             }
         });
 
@@ -113,12 +97,15 @@ public class StadiumListFragment extends BaseLazyFragment {
             }
         });
 
+
+        fetchData();
+
         return root;
     }
 
     @Override
     public void fetchData() {
-        Logger.t(TAG).d("fetchData");
+        Logger.t("Zero").d("fetchData");
         fillData(PERPAGE, mCurrIndex);
     }
 
