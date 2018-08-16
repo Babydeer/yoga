@@ -24,4 +24,12 @@ public class Config {
         SpfUtils.putString("cookie", cookie);
     }
 
+    public static String geToken() {
+        return SpfUtils.getString("token");
+    }
+
+    public static void setToken(String token) {
+        SpfUtils.putString("token", token);
+    }
+
 }

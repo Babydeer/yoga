@@ -2,6 +2,7 @@ package com.zero.yoga.internet;
 
 import android.util.Log;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 import com.zero.yoga.internet.interceptor.AddCookiesInterceptor;
@@ -67,6 +68,7 @@ public class HttpUtils {
                 .addInterceptor(new ReceivedCookiesInterceptor())
                 .addInterceptor(new AddCookiesInterceptor())
                 .addInterceptor(logInterceptor)
+                .addNetworkInterceptor(new StethoInterceptor())
                 .readTimeout(10000, TimeUnit.SECONDS)
                 .connectTimeout(10000, TimeUnit.SECONDS)
                 .writeTimeout(10000, TimeUnit.SECONDS)

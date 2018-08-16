@@ -26,19 +26,36 @@
         android:roundIcon="@mipmap/yogachain_ic"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".stadiums.StadiumDetailsActivity" />
-        <activity android:name=".mine.FeedBackActivity" />
-        <activity android:name=".stadiums.StadiumHistoryActivity" />
-        <activity android:name=".mine.UserCenterActivity" />
+        <activity
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".stadiums.StadiumSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".stadiums.StadiumDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mine.FeedBackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".stadiums.StadiumHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mine.UserCenterActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="design_width"

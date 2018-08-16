@@ -18,6 +18,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.mine.MineFragment;
 import com.zero.yoga.stadiums.StadiumFragment;
+import com.zero.yoga.stadiums.StadiumSearchActivity;
 import com.zero.yoga.utils.BottomNavigationViewHelper;
 import com.zero.yoga.utils.StatusBarUtils;
 import com.zero.yoga.view.TestFragment;
@@ -50,7 +51,14 @@ public class MainActivity extends BaseActivity {
 
         tvTitle.setText("场馆");
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        ivSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StadiumSearchActivity.jump2StadiumSearchActivity(MainActivity.this);
+            }
+        });
+
+        bottomNavigationView =  findViewById(R.id.bottom_navigation);
         //默认 >3 的选中效果会影响ViewPager的滑动切换时的效果，故利用反射去掉
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -66,7 +74,7 @@ public class MainActivity extends BaseActivity {
                             case R.id.mine:
                                 viewPager.setCurrentItem(1);
                                 tvTitle.setText("个人中心");
-                                ivSearch.setVisibility(View.INVISIBLE);
+                                ivSearch.setVisibility(View.GONE);
                                 break;
                         }
                         return false;

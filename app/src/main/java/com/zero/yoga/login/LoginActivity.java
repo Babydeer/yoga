@@ -22,6 +22,7 @@ import com.zero.yoga.internet.HttpUtils;
 import com.zero.yoga.internet.RxHelper;
 import com.zero.yoga.internet.RxObserver;
 import com.zero.yoga.internet.YogaAPI;
+import com.zero.yoga.utils.Config;
 import com.zero.yoga.utils.InputUtils;
 import com.zero.yoga.utils.StatusBarUtils;
 import com.zero.yoga.utils.ToastUtils;
@@ -34,7 +35,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class LoginActivity extends BaseActivity {
 
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "LoginAct";
 
     private static final int COUNT_TV = 1;
 
@@ -71,15 +72,6 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
-//        StatusBarUtils.with(this)
-//                .setIsActionBar(false)
-//                .setDrawable(getResources().getDrawable(R.drawable.shape_status_transparent))
-//                .setColor(R.color.c_00000000)
-//                .init();
-
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        tintManager.setStatusBarTintEnabled(true);
-        tintManager.setNavigationBarTintEnabled(true);
 
         tvGetIdentifyCode = findViewById(R.id.tvGetIdentifyCode);
         btnLogin = findViewById(R.id.btnLogin);
@@ -108,7 +100,22 @@ public class LoginActivity extends BaseActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                doLogin();
+                final String phoneNo = etPhoneNo.getText().toString().trim();
+                final String smsCode = etIdentifyCode.getText().toString().trim();
+
+                //TODO: 调试
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+
+                if (TextUtils.isEmpty(phoneNo) || !InputUtils.isPhone(phoneNo)) {
+                    ToastUtils.showShortToast("手机号码格式不对");
+                    return;
+                }
+                if (TextUtils.isEmpty(smsCode) || smsCode.length() != 6) {
+                    ToastUtils.showShortToast("验证码输入有误");
+                    return;
+                }
+                doLogin(phoneNo, smsCode);
             }
         });
 
@@ -122,23 +129,38 @@ public class LoginActivity extends BaseActivity {
                 .subscribe(new RxObserver<SendSmsResponse>() {
                     @Override
                     public void _onNext(SendSmsResponse response) {
-                        Logger.t("Zero").i(response.toString());
+                        Logger.t(TAG).i(response.toString());
                     }
 
                     @Override
                     public void _onError(String msg) {
-
+                        Logger.t(TAG).e(msg);
+                        ToastUtils.showShortToast(msg);
                     }
                 });
     }
 
-    private void doLogin() {
+    private void doLogin(final String phoneNo, final String smsCode) {
+        Logger.t(TAG).i("doLogin...");
 
-        Logger.t("Zero").i("doLogin...");
+        HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).login(phoneNo, smsCode)
+                .compose(new RxHelper<LoginResponse>().io_main(LoginActivity.this, true))
+                .subscribe(new RxObserver<LoginResponse>() {
+                    @Override
+                    public void _onNext(LoginResponse response) {
+                        Logger.t(TAG).i(response.toString());
+                        Config.setCookie(response.getData().getToken());
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
 
+                    @Override
+                    public void _onError(String msg) {
+                        Logger.t(TAG).e(msg);
+                        ToastUtils.showShortToast(msg);
+                    }
+                });
 
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
 
     }
 }

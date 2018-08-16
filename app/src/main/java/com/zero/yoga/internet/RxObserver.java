@@ -26,7 +26,11 @@ public class RxObserver<T extends BaseResponse> implements Observer<T> {
 
     @Override
     public void onNext(T t) {
-        _onNext(t);
+        if (t.isSuccess()) {
+            _onNext(t);
+        } else {
+            _onError(t.getMsg());
+        }
     }
 
     @Override

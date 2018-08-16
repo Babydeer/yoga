@@ -3,11 +3,12 @@ package com.zero.yoga.base
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import com.trello.rxlifecycle2.components.support.RxFragment
 
 /**
  * Created by zero on 2018/8/7.
  */
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : RxFragment() {
 
     fun switchContent(from: Fragment, to: Fragment, layoutId: Int) {
         val fm: FragmentManager = childFragmentManager

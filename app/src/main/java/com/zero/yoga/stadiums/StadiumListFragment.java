@@ -1,5 +1,6 @@
 package com.zero.yoga.stadiums;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,13 +12,24 @@ import android.widget.ImageView;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.orhanobut.logger.Logger;
+import com.zero.yoga.MainActivity;
 import com.zero.yoga.R;
 import com.zero.yoga.adapter.StadiumListAdapter;
 import com.zero.yoga.adapter.TestAdapter;
+import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.base.BaseFragment;
 import com.zero.yoga.base.BaseLazyFragment;
 import com.zero.yoga.base.TBaseRecyclerAdapter;
+import com.zero.yoga.bean.response.BaseResponse;
+import com.zero.yoga.bean.response.LoginResponse;
+import com.zero.yoga.internet.HttpUtils;
+import com.zero.yoga.internet.RxHelper;
+import com.zero.yoga.internet.RxObserver;
+import com.zero.yoga.internet.YogaAPI;
+import com.zero.yoga.login.LoginActivity;
+import com.zero.yoga.utils.Config;
 import com.zero.yoga.utils.ItemClickSupport;
+import com.zero.yoga.utils.ToastUtils;
 import com.zero.yoga.view.DividerItemDecoration;
 import com.zero.yoga.view.TestFragment;
 
@@ -33,6 +45,10 @@ public class StadiumListFragment extends BaseLazyFragment {
     private static final String TAG = "StadiumList";
 
     private XRecyclerView xrecyclerView;
+
+    private static int PERPAGE = 10;
+
+    private int mCurrIndex = 1;
 
     private TBaseRecyclerAdapter testAdapter;
     ArrayList<String> data;
@@ -73,6 +89,8 @@ public class StadiumListFragment extends BaseLazyFragment {
                     data.add("test: " + i);
                 }
                 testAdapter.setDataList(data);
+                mCurrIndex = 1;
+                prepareFetchData(true);
             }
 
             @Override
@@ -81,6 +99,7 @@ public class StadiumListFragment extends BaseLazyFragment {
                     data.add("test: " + i);
                 }
                 testAdapter.addDataList(data);
+                prepareFetchData();
             }
         });
 
@@ -100,6 +119,31 @@ public class StadiumListFragment extends BaseLazyFragment {
     @Override
     public void fetchData() {
         Logger.t(TAG).d("fetchData");
+        fillData(PERPAGE, mCurrIndex);
+    }
+
+    private void fillData(int perpage, int nowindex) {
+
+        HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).merchantSelectByPage("", "", nowindex, perpage)
+                .compose(new RxHelper<BaseResponse>().io_main((BaseActivity) getActivity(), true))
+                .subscribe(new RxObserver<BaseResponse>() {
+                    @Override
+                    public void _onNext(BaseResponse response) {
+
+
+                    }
+
+                    @Override
+                    public void _onError(String msg) {
+                        Logger.t(TAG).e(msg);
+                        ToastUtils.showShortToast(msg);
+                    }
+                });
+
+    }
+
+
+    public void doSearch(final String key) {
 
     }
 }
