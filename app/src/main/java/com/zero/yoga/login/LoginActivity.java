@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.zero.yoga.MainActivity;
 import com.zero.yoga.R;
 import com.zero.yoga.base.BaseActivity;
@@ -75,6 +76,10 @@ public class LoginActivity extends BaseActivity {
 //                .setDrawable(getResources().getDrawable(R.drawable.shape_status_transparent))
 //                .setColor(R.color.c_00000000)
 //                .init();
+
+        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+        tintManager.setStatusBarTintEnabled(true);
+        tintManager.setNavigationBarTintEnabled(true);
 
         tvGetIdentifyCode = findViewById(R.id.tvGetIdentifyCode);
         btnLogin = findViewById(R.id.btnLogin);

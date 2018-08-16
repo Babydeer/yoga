@@ -1,5 +1,7 @@
 package com.zero.yoga;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -7,13 +9,17 @@ import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.mine.MineFragment;
 import com.zero.yoga.stadiums.StadiumFragment;
 import com.zero.yoga.utils.BottomNavigationViewHelper;
+import com.zero.yoga.utils.StatusBarUtils;
 import com.zero.yoga.view.TestFragment;
 
 import org.jetbrains.annotations.Nullable;
@@ -31,6 +37,7 @@ public class MainActivity extends BaseActivity {
     private TextView tvTitle;
 
     private ImageView ivSearch;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
