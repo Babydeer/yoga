@@ -90,17 +90,14 @@ public class MineFragment extends BaseLazyFragment {
 
 
     private void onMyCourseList() {
-        Logger.t(TAG).i("onMyCourseList");
         StadiumHistoryActivity.jump2StadiumHistoryActivity(getActivity());
     }
 
     private void onFeedBack() {
-        Logger.t(TAG).i("onFeedBack");
         FeedBackActivity.jump2FeedBackActivity(getActivity());
     }
 
     private void onAbout() {
-        Logger.t(TAG).i("onAbout");
         AboutActivity.jump2AboutActivity(getActivity());
     }
 }

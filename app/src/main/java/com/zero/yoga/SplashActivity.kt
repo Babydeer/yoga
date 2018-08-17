@@ -16,7 +16,7 @@ class SplashActivity : BasePermissionsActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_splash)
         if (checkPermissions(permissions)) {
             val handler = Handler()
             handler.postDelayed({ jumps() }, 1500)

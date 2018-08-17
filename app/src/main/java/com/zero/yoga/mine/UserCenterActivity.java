@@ -19,6 +19,7 @@ import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.base.TBaseRecyclerAdapter;
 import com.zero.yoga.stadiums.DateBean;
 import com.zero.yoga.stadiums.DateFactory;
+import com.zero.yoga.utils.BackUtils;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -57,7 +58,7 @@ public class UserCenterActivity extends BaseActivity {
         setContentView(R.layout.activity_usercenter);
         ivBack = findViewById(R.id.ivBack);
         tvTitle = findViewById(R.id.tvTitle);
-
+        BackUtils.onBackPress(this, ivBack);
         ivPortrait = findViewById(R.id.ivPortrait);
         etName = findViewById(R.id.etName);
         etSex = findViewById(R.id.etSex);

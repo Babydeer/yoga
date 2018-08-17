@@ -13,13 +13,14 @@ def buildTime(){
 }
 
 android {
+    def versionAppName = build_name
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.zero.yoga"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "${versionAppName}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
@@ -68,8 +69,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
+            buildConfigField "String", "BUILD_NAME", "\"${build_name}\""
             signingConfig signingConfigs.release
+        }
+
+        debug{
+            buildConfigField "String", "BUILD_NAME", "\"${build_name}\""
         }
     }
 

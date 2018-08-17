@@ -40,7 +40,7 @@ import java.util.ArrayList;
  * Created by zero on 2018/8/13.
  */
 
-public class StadiumListFragment extends BaseLazyFragment {
+public class StadiumListFragment extends BaseFragment {
 
     private static final String TAG = "StadiumList";
 
@@ -48,7 +48,7 @@ public class StadiumListFragment extends BaseLazyFragment {
 
     private static int PERPAGE = 10;
 
-    private int mCurrIndex = 1;
+    private int mCurrIndex = 0;
 
     private TBaseRecyclerAdapter testAdapter;
     ArrayList<String> data;
@@ -77,13 +77,13 @@ public class StadiumListFragment extends BaseLazyFragment {
         xrecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                mCurrIndex = 1;
-                prepareFetchData(true);
+                mCurrIndex = 0;
+                fetchData();
             }
 
             @Override
             public void onLoadMore() {
-                prepareFetchData(true);
+                fetchData();
             }
         });
 
@@ -103,13 +103,11 @@ public class StadiumListFragment extends BaseLazyFragment {
         return root;
     }
 
-    @Override
     public void fetchData() {
-        Logger.t("Zero").d("fetchData");
-        fillData(PERPAGE, mCurrIndex);
+        fillData("", "", PERPAGE, mCurrIndex);
     }
 
-    private void fillData(int perpage, int nowindex) {
+    private void fillData(final String merchanName, final String username, final int perpage, final int nowindex) {
 
         HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).merchantSelectByPage("", "", nowindex, perpage)
                 .compose(new RxHelper<BaseResponse>().io_main((BaseActivity) getActivity(), true))
@@ -131,6 +129,7 @@ public class StadiumListFragment extends BaseLazyFragment {
 
 
     public void doSearch(final String key) {
-
+        mCurrIndex = 0;
+        fillData(key, "", PERPAGE, mCurrIndex);
     }
 }

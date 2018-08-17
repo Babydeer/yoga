@@ -15,6 +15,7 @@ import com.orhanobut.logger.Logger;
 import com.zero.yoga.R;
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.base.TBaseRecyclerAdapter;
+import com.zero.yoga.utils.BackUtils;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -55,7 +56,7 @@ public class StadiumHistoryActivity extends BaseActivity {
         ivBack = findViewById(R.id.ivBack);
         tvSubscribed = findViewById(R.id.tvSubscribed);
         tvHistory = findViewById(R.id.tvHistory);
-
+        BackUtils.onBackPress(this, ivBack);
         tvSubscribed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

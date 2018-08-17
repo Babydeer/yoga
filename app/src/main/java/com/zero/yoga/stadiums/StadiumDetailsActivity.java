@@ -27,6 +27,7 @@ import com.zero.yoga.adapter.DatesAdapter;
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.base.TBaseRecyclerAdapter;
 import com.zero.yoga.mine.MineFragment;
+import com.zero.yoga.utils.BackUtils;
 import com.zero.yoga.utils.BottomNavigationViewHelper;
 import com.zero.yoga.utils.ItemClickSupport;
 
@@ -69,7 +70,7 @@ public class StadiumDetailsActivity extends BaseActivity {
         setContentView(R.layout.activity_statium_details);
         ivBack = findViewById(R.id.ivBack);
         tvTitle = findViewById(R.id.tvTitle);
-
+        BackUtils.onBackPress(this, ivBack);
         ivIcon = findViewById(R.id.ivIcon);
         tvStadiumName = findViewById(R.id.tvStadiumName);
         tvStadiumTel = findViewById(R.id.tvStadiumTel);

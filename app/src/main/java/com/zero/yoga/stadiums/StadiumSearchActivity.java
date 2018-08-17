@@ -19,6 +19,7 @@ import com.zero.yoga.MainActivity;
 import com.zero.yoga.R;
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.base.TBaseRecyclerAdapter;
+import com.zero.yoga.utils.BackUtils;
 import com.zero.yoga.utils.ToastUtils;
 
 import org.jetbrains.annotations.Nullable;
@@ -53,7 +54,7 @@ public class StadiumSearchActivity extends BaseActivity {
         setContentView(R.layout.activity_stadiumsearch);
         ivBack = findViewById(R.id.ivBack);
         svStadium = findViewById(R.id.svStadium);
-
+        BackUtils.onBackPress(this, ivBack);
         ivSearch = findViewById(R.id.ivSearch);
         ivSearch.setOnClickListener(new View.OnClickListener() {
             @Override

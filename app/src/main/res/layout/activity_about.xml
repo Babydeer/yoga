@@ -30,37 +30,37 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="意见反馈"
+            android:text="关于"
             android:textColor="#121212"
             android:textSize="18sp" />
 
 
     </RelativeLayout>
 
+    <ImageView
+        android:layout_width="130px"
+        android:layout_height="130px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="90px"
+        android:src="@mipmap/yogachain_ic" />
 
-    <EditText
-        android:id="@+id/etFeedBack"
-        android:layout_width="match_parent"
-        android:layout_height="510px"
-        android:layout_marginHorizontal="24px"
-        android:layout_marginTop="26px"
-        android:background="@drawable/shape_et_feedback"
-        android:gravity="left|top"
-        android:hint="反馈相关建议..."
-        android:padding="30px"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="46px"
+        android:text="瑜伽链"
         android:textColor="#121212"
-        android:textColorHint="#999999"
-        android:textSize="12sp" />
+        android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="80px"
-        android:layout_marginHorizontal="24px"
-        android:layout_marginTop="88px"
-        android:background="@drawable/shape_button_circular"
-        android:text="提交"
-        android:textColor="#ffffff"
-        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="22px"
+        android:text="v1.0.0"
+        android:textColor="#505050"
+        android:textSize="12sp" />
 
 </com.zhy.autolayout.AutoLinearLayout>

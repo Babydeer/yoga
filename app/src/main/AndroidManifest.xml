@@ -57,6 +57,10 @@
             android:name=".mine.UserCenterActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".mine.AboutActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="design_width"
             android:value="750" />

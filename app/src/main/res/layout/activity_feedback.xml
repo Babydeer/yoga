@@ -53,7 +53,7 @@
         android:textSize="12sp" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
         android:layout_height="80px"
         android:layout_marginHorizontal="24px"
