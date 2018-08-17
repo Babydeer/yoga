@@ -69,7 +69,7 @@ public class StadiumSearchActivity extends BaseActivity {
         });
 
         if (stadiumListFragment == null) {
-            stadiumListFragment = StadiumListFragment.newInstance();
+            stadiumListFragment = StadiumListFragment.newInstance(true);
             initFragment(stadiumListFragment, R.id.flContainer);
         }
 

@@ -30,7 +30,7 @@ public class StadiumFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @android.support.annotation.Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_stadium, container, false);
-        initFragment(StadiumListFragment.newInstance(), R.id.flContainer);
+        initFragment(StadiumListFragment.newInstance(false), R.id.flContainer);
 
         return root;
     }

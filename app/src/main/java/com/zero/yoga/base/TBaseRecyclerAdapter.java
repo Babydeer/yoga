@@ -33,7 +33,6 @@ public abstract class TBaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recyc
 
     public void setSelectPostion(int selectPostion) {
         this.mSelectPostion = selectPostion;
-        Logger.t(TAG).i("selectPostion: " + mSelectPostion);
         notifyDataSetChanged();
     }
 

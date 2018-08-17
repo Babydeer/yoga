@@ -2,6 +2,7 @@ package com.zero.yoga.internet;
 
 import com.zero.yoga.bean.response.BaseResponse;
 import com.zero.yoga.bean.response.LoginResponse;
+import com.zero.yoga.bean.response.MerchanListResponse;
 import com.zero.yoga.bean.response.SendSmsResponse;
 
 import io.reactivex.Observable;
@@ -44,7 +45,7 @@ public interface YogaAPI {
 
     @POST("app/merchant/selectByPage")
     @FormUrlEncoded
-    Observable<BaseResponse> merchantSelectByPage(@Field("merchantName") String merchantName,@Field("username") String username,@Field("offset") int offset,@Field("limit") int limit);
+    Observable<MerchanListResponse> merchantSelectByPage(@Field("merchantName") String merchantName, @Field("username") String username, @Field("offset") int offset, @Field("limit") int limit);
 
     @POST("app/terchant/selectById")
     @FormUrlEncoded
