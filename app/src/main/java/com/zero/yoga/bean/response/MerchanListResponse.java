@@ -8,9 +8,10 @@ import java.util.List;
 
 public class MerchanListResponse extends BaseResponse {
 
+
     /**
      * code : 0
-     * data : {"rows":[{"id":1,"merchantName":"123瑜伽2222","address":"222","merchantPictureURL":null,"longitude":"22.5318175320","latitude":"113.9497815175"},{"id":2,"merchantName":"123瑜伽2222","address":"222","merchantPictureURL":null,"longitude":"22.5318175320","latitude":"113.9497815175"},{"id":3,"merchantName":"星宇瑜伽","address":"南山区高新南十路12号201","merchantPictureURL":null,"longitude":"22.5318175320","latitude":"113.9497815175"}],"total":3}
+     * data : {"rows":[{"id":1,"merchantName":"123瑜伽2222","address":"222","phoneNo":"22222","merchantPictureURL":null,"longitude":"22.5318175320","latitude":"113.9497815175","businessHours":"9:00-22:00"},{"id":3,"merchantName":"星宇瑜伽","address":"深圳市福田区泰然六路2号207","phoneNo":"15296503789","merchantPictureURL":null,"longitude":"114.03476348330996","latitude":"22.538404758145365","businessHours":"9:00-22:00"}],"total":4}
      */
 
     private DataBean data;
@@ -25,8 +26,8 @@ public class MerchanListResponse extends BaseResponse {
 
     public static class DataBean {
         /**
-         * rows : [{"id":1,"merchantName":"123瑜伽2222","address":"222","merchantPictureURL":null,"longitude":"22.5318175320","latitude":"113.9497815175"},{"id":2,"merchantName":"123瑜伽2222","address":"222","merchantPictureURL":null,"longitude":"22.5318175320","latitude":"113.9497815175"},{"id":3,"merchantName":"星宇瑜伽","address":"南山区高新南十路12号201","merchantPictureURL":null,"longitude":"22.5318175320","latitude":"113.9497815175"}]
-         * total : 3
+         * rows : [{"id":1,"merchantName":"123瑜伽2222","address":"222","phoneNo":"22222","merchantPictureURL":null,"longitude":"22.5318175320","latitude":"113.9497815175","businessHours":"9:00-22:00"},{"id":3,"merchantName":"星宇瑜伽","address":"深圳市福田区泰然六路2号207","phoneNo":"15296503789","merchantPictureURL":null,"longitude":"114.03476348330996","latitude":"22.538404758145365","businessHours":"9:00-22:00"}]
+         * total : 4
          */
 
         private int total;
@@ -53,23 +54,27 @@ public class MerchanListResponse extends BaseResponse {
              * id : 1
              * merchantName : 123瑜伽2222
              * address : 222
+             * phoneNo : 22222
              * merchantPictureURL : null
              * longitude : 22.5318175320
              * latitude : 113.9497815175
+             * businessHours : 9:00-22:00
              */
 
-            private int id;
+            private long id;
             private String merchantName;
             private String address;
+            private String phoneNo;
             private String merchantPictureURL;
-            private String longitude;
-            private String latitude;
+            private double longitude;
+            private double latitude;
+            private String businessHours;
 
-            public int getId() {
+            public long getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(long id) {
                 this.id = id;
             }
 
@@ -89,6 +94,14 @@ public class MerchanListResponse extends BaseResponse {
                 this.address = address;
             }
 
+            public String getPhoneNo() {
+                return phoneNo;
+            }
+
+            public void setPhoneNo(String phoneNo) {
+                this.phoneNo = phoneNo;
+            }
+
             public String getMerchantPictureURL() {
                 return merchantPictureURL;
             }
@@ -98,31 +111,27 @@ public class MerchanListResponse extends BaseResponse {
             }
 
             public double getLongitude() {
-                double ret = 0;
-                try {
-                    ret = Double.parseDouble(longitude);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return ret;
+                return longitude;
             }
 
-            public void setLongitude(String longitude) {
+            public void setLongitude(double longitude) {
                 this.longitude = longitude;
             }
 
             public double getLatitude() {
-                double ret = 0;
-                try {
-                    ret = Double.parseDouble(latitude);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return ret;
+                return latitude;
             }
 
-            public void setLatitude(String latitude) {
+            public void setLatitude(double latitude) {
                 this.latitude = latitude;
+            }
+
+            public String getBusinessHours() {
+                return businessHours;
+            }
+
+            public void setBusinessHours(String businessHours) {
+                this.businessHours = businessHours;
             }
         }
     }

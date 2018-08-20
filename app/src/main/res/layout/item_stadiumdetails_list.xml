@@ -29,6 +29,7 @@
         android:layout_height="36px"
         android:layout_alignTop="@+id/ivIcon"
         android:layout_marginStart="20px"
+        android:visibility="gone"
         android:layout_toEndOf="@+id/tvCourseName"
         android:src="@drawable/list_ic_qian" />
 

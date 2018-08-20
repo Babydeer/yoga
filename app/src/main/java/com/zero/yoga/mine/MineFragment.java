@@ -5,20 +5,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.orhanobut.logger.Logger;
 import com.zero.yoga.R;
+import com.zero.yoga.base.BaseFragment;
 import com.zero.yoga.base.BaseLazyFragment;
 import com.zero.yoga.stadiums.StadiumHistoryActivity;
+import com.zero.yoga.utils.Config;
 import com.zero.yoga.utils.GlideCircleTransform;
 
 /**
  * Created by zero on 2018/8/13.
  */
 
-public class MineFragment extends BaseLazyFragment {
+public class MineFragment extends BaseFragment {
 
     private static final String TAG = "Mine";
 
@@ -30,6 +33,8 @@ public class MineFragment extends BaseLazyFragment {
     private TextView tvMyCourseList;
     private TextView tvFeedBack;
     private TextView tvAbout;
+
+    private LinearLayout llUserInfo;
 
 
     public static MineFragment newInstance() {
@@ -53,6 +58,14 @@ public class MineFragment extends BaseLazyFragment {
         tvMyCourseList = root.findViewById(R.id.tvMyCourseList);
         tvFeedBack = root.findViewById(R.id.tvFeedBack);
         tvAbout = root.findViewById(R.id.tvAbout);
+        llUserInfo = root.findViewById(R.id.llUserInfo);
+
+        llUserInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserCenterActivity.jump2UserCenterActivity(getActivity());
+            }
+        });
 
         tvMyCourseList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,17 +87,26 @@ public class MineFragment extends BaseLazyFragment {
                 onAbout();
             }
         });
+        initData();
 
 
-//        Glide.with(getActivity()).load("url").placeholder(R.mipmap.yogachain_ic)
-//                .crossFade()
-//                .transform(new GlideCircleTransform(getActivity()))
-//                .into(ivIcon);
         return root;
     }
 
-    @Override
-    public void fetchData() {
+
+    public void initData() {
+        Glide.with(getActivity()).load(Config.UserInfo.getHeaderPicture()).placeholder(R.drawable.personal_ic_pic)
+                .crossFade()
+                .transform(new GlideCircleTransform(getActivity()))
+                .into(ivIcon);
+
+        tvPersonalName.setText(Config.UserInfo.getNickname());
+        tvPersonalPhoneN0.setText(Config.UserInfo.getPhoneNo());
+        if (Config.UserInfo.getGrade() == 0) {
+            ivSex.setImageResource(R.drawable.personal_ic_man);
+        } else {
+            ivSex.setImageResource(R.drawable.personal_ic_woman);
+        }
 
     }
 

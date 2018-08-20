@@ -103,7 +103,7 @@
             android:background="#eeeeee" />
 
         <TextView
-            android:id="@+id/tvStadiumDis"
+            android:id="@+id/tvStadiumTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/ivIcon"
@@ -129,7 +129,7 @@
         app:tabPaddingStart="1dp"
         app:tabPaddingTop="0dp" />
 
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/xrecycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

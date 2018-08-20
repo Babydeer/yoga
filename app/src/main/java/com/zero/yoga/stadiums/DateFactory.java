@@ -19,11 +19,11 @@ public class DateFactory {
         for (int i = 0; i < 7; i++) {
             SimpleDateFormat sFmt1 = new SimpleDateFormat("MM-dd");
             SimpleDateFormat sFmt2 = new SimpleDateFormat("E");
-            SimpleDateFormat sFmt3 = new SimpleDateFormat("yyyy-MM-dd");
-            calendar.add(Calendar.DAY_OF_WEEK, 1);
+            SimpleDateFormat sFmt3 = new SimpleDateFormat("yyyyMMdd");
             Date datei = calendar.getTime();
             DateBean dateBean = new DateBean(sFmt1.format(datei), sFmt2.format(datei), sFmt3.format(datei), calendar.getTimeInMillis());
             result.add(dateBean);
+            calendar.add(Calendar.DAY_OF_WEEK, 1);
         }
         return result;
     }

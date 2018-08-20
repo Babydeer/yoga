@@ -17,6 +17,11 @@ abstract class BaseActivity : RxAppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
 
     fun switchContent(from: Fragment, to: Fragment, layoutId: Int) {
         val fm: FragmentManager = supportFragmentManager

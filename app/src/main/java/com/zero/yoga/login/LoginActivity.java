@@ -104,8 +104,8 @@ public class LoginActivity extends BaseActivity {
                 final String smsCode = etIdentifyCode.getText().toString().trim();
 
                 //TODO: 调试
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                startActivity(intent);
 
                 if (TextUtils.isEmpty(phoneNo) || !InputUtils.isPhone(phoneNo)) {
                     ToastUtils.showShortToast("手机号码格式不对");
@@ -149,7 +149,12 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void _onNext(LoginResponse response) {
                         Logger.t(TAG).i(response.toString());
-                        Config.setCookie(response.getData().getToken());
+                        Config.setToken(response.getData().getToken());
+                        Config.UserInfo.setHeaderPicture(response.getData().getHeaderPicture());
+                        Config.UserInfo.setGrade(response.getData().getGrade());
+                        Config.UserInfo.setNickname(response.getData().getNickname());
+                        Config.UserInfo.setPhoneNo(response.getData().getPhoneNo());
+                        Config.UserInfo.setUsername(response.getData().getUsername());
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     }

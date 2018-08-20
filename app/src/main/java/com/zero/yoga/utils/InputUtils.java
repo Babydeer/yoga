@@ -48,6 +48,11 @@ public class InputUtils {
         return df.format(new Date());
     }
 
+    public static String getDataTime(String format,long time) {
+        SimpleDateFormat df = new SimpleDateFormat(format);
+        return df.format(new Date(time));
+    }
+
     /**
      * 返回当前系统时间
      */

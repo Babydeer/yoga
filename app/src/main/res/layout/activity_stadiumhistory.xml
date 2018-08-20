@@ -62,12 +62,10 @@
         android:layout_height="1px"
         android:background="#eeeeee" />
 
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/xrecycler_view"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="24px"
-        android:scrollbars="none" />
+        android:layout_height="match_parent" />
 
     <View
         android:layout_width="match_parent"

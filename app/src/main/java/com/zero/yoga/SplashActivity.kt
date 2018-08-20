@@ -31,6 +31,7 @@ class SplashActivity : BasePermissionsActivity() {
 
     fun jumps() {
         startActivity<LoginActivity>()
+        finish()
     }
 
     override fun permissionSuccess(requestCode: Int) {

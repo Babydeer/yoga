@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -17,9 +18,16 @@ import com.orhanobut.logger.Logger;
 import com.zero.yoga.R;
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.base.TBaseRecyclerAdapter;
+import com.zero.yoga.bean.response.CourseDelResponse;
+import com.zero.yoga.bean.response.FeedbackResponse;
+import com.zero.yoga.internet.HttpUtils;
+import com.zero.yoga.internet.RxHelper;
+import com.zero.yoga.internet.RxObserver;
+import com.zero.yoga.internet.YogaAPI;
 import com.zero.yoga.stadiums.DateBean;
 import com.zero.yoga.stadiums.DateFactory;
 import com.zero.yoga.utils.BackUtils;
+import com.zero.yoga.utils.ToastUtils;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -58,6 +66,31 @@ public class FeedBackActivity extends BaseActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
 
         tvTitle.setText("意见反馈");
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String feedback = etFeedBack.getText().toString().trim();
+                if (TextUtils.isEmpty(feedback)) {
+                    return;
+                }
+
+                HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).suggestionAddOne(feedback)
+                        .compose(new RxHelper<FeedbackResponse>().io_main(FeedBackActivity.this, true))
+                        .subscribe(new RxObserver<FeedbackResponse>() {
+                            @Override
+                            public void _onNext(FeedbackResponse response) {
+                                ToastUtils.showShortToast(response.getMsg());
+                            }
+
+                            @Override
+                            public void _onError(String msg) {
+                                ToastUtils.showShortToast(msg);
+                            }
+                        });
+
+            }
+        });
 
     }
 

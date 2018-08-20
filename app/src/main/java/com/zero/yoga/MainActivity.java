@@ -58,7 +58,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        bottomNavigationView =  findViewById(R.id.bottom_navigation);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
         //默认 >3 的选中效果会影响ViewPager的滑动切换时的效果，故利用反射去掉
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -94,21 +94,20 @@ public class MainActivity extends BaseActivity {
                 } else {
                     bottomNavigationView.getMenu().getItem(0).setChecked(false);
                 }
+                bottomNavigationView.setSelectedItemId(position);
+                if (position == 0) {
+                    tvTitle.setText("场馆");
+                    ivSearch.setVisibility(View.VISIBLE);
+                } else {
+                    tvTitle.setText("个人中心");
+                    ivSearch.setVisibility(View.GONE);
+                }
                 menuItem = bottomNavigationView.getMenu().getItem(position);
                 menuItem.setChecked(true);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-            }
-        });
-
-//        禁止ViewPager滑动
-        viewPager.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
             }
         });
 

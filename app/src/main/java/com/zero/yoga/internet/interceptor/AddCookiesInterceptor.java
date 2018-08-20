@@ -18,9 +18,9 @@ public class AddCookiesInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         final Request.Builder builder = chain.request().newBuilder();
-        builder.addHeader("cookie", Config.getCookie());
+//        builder.addHeader("cookie", Config.getCookie());
         builder.addHeader("X-version", "1.0.0");
-        builder.addHeader("token", Config.getCookie());
+        builder.addHeader("X-token", Config.geToken());
         builder.addHeader("X-appOS", "0");
         builder.addHeader("Content-type", "application/json;charset=UTF-8");
         return chain.proceed(builder.build());

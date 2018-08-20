@@ -53,7 +53,7 @@ public class HttpUtils {
             mMessage.append(message.concat("\n"));
             // 请求或者响应结束，打印整条日志
             if (message.startsWith("<-- END HTTP")) {
-                Logger.t(TAG).d( message);
+                Logger.t(TAG).d( mMessage.toString());
             }
         }
     }
@@ -65,7 +65,7 @@ public class HttpUtils {
         HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor(new HttpLogger());
         logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = httpBuilder
-                .addInterceptor(new ReceivedCookiesInterceptor())
+//                .addInterceptor(new ReceivedCookiesInterceptor())
                 .addInterceptor(new AddCookiesInterceptor())
                 .addInterceptor(logInterceptor)
                 .addNetworkInterceptor(new StethoInterceptor())

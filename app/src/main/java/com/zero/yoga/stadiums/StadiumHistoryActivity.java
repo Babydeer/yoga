@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,8 +14,10 @@ import android.widget.TextView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.orhanobut.logger.Logger;
 import com.zero.yoga.R;
+import com.zero.yoga.ViewPagerAdapter;
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.base.TBaseRecyclerAdapter;
+import com.zero.yoga.mine.MineFragment;
 import com.zero.yoga.utils.BackUtils;
 
 import org.jetbrains.annotations.Nullable;
@@ -27,18 +30,14 @@ import java.util.List;
 
 public class StadiumHistoryActivity extends BaseActivity {
 
-    private static final String TAG = "StadiumDetails";
+    private static final String TAG = "StadiumHis";
 
 
     private ImageView ivBack;
     private TextView tvSubscribed;
     private TextView tvHistory;
 
-
-    private TabLayout tl;
-    private XRecyclerView xrecyclerView;
-    private List<DateBean> tabs;
-    private TBaseRecyclerAdapter datesAdapter;
+    private ViewPager viewPager;
 
 
     private boolean isSelectSubscribed = true;
@@ -62,6 +61,7 @@ public class StadiumHistoryActivity extends BaseActivity {
             public void onClick(View view) {
                 isSelectSubscribed = true;
                 setTitleTab();
+                viewPager.setCurrentItem(0);
             }
         });
 
@@ -70,13 +70,33 @@ public class StadiumHistoryActivity extends BaseActivity {
             public void onClick(View view) {
                 isSelectSubscribed = false;
                 setTitleTab();
+                viewPager.setCurrentItem(1);
             }
         });
 
-        tl = findViewById(R.id.tl);
-        xrecyclerView = findViewById(R.id.xrecycler_view);
-        initXRecyclerView();
+        viewPager = findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0) {
+                    isSelectSubscribed = true;
+                } else {
+                    isSelectSubscribed = false;
+                }
+                setTitleTab();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
@@ -86,6 +106,7 @@ public class StadiumHistoryActivity extends BaseActivity {
             tvSubscribed.setTextColor(getResources().getColor(R.color.c_ffffff));
             tvHistory.setBackground(getResources().getDrawable(R.drawable.shape_right_transparent));
             tvHistory.setTextColor(getResources().getColor(R.color.c_121212));
+
         } else {
             tvSubscribed.setBackground(getResources().getDrawable(R.drawable.shape_left_transparent));
             tvSubscribed.setTextColor(getResources().getColor(R.color.c_121212));
@@ -94,17 +115,12 @@ public class StadiumHistoryActivity extends BaseActivity {
         }
     }
 
-    private void initXRecyclerView() {
 
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+        adapter.addFragment(MyCourseFragment.newInstance());
+        adapter.addFragment(HistoryCourseFragment.newInstance());
+        viewPager.setAdapter(adapter);
     }
-
-    private void updateXRecyclerView(final int position) {
-        if (position < 0 || position >= tabs.size()) {
-            return;
-        }
-        final DateBean dateBean = tabs.get(position);
-        Logger.t(TAG).i(dateBean.toString());
-    }
-
-
 }

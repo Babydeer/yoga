@@ -52,7 +52,7 @@ public class StadiumListFragment extends BaseFragment {
 
     private String seachKey = "";
 
-    private TBaseRecyclerAdapter stadiumListAdapter;
+    private StadiumListAdapter stadiumListAdapter;
 
 
     private static class MyAsyncTask extends AsyncTask<MerchanListResponse, Void, ArrayList<MerchanModel>> {
@@ -129,6 +129,7 @@ public class StadiumListFragment extends BaseFragment {
 
             @Override
             public void onLoadMore() {
+                mCurrIndex = (int) Math.ceil((stadiumListAdapter.getItemCount() / PERPAGE));
                 fetchData();
             }
         });
@@ -137,9 +138,12 @@ public class StadiumListFragment extends BaseFragment {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int
                     position, View v) {
-                Logger.t(TAG).i("position: " + position);
+                final int index = position-1;
+                if(index < 0 || index >=stadiumListAdapter.getItemCount()){
+                    return;
+                }
                 StadiumDetailsActivity.jump2StadiumDetailsActivity
-                        (getActivity());
+                        (getActivity(),stadiumListAdapter.getData(index));
             }
         });
         if (!isSearch) {
@@ -149,7 +153,6 @@ public class StadiumListFragment extends BaseFragment {
     }
 
     public void fetchData() {
-        mCurrIndex = (int) Math.ceil((stadiumListAdapter.getItemCount() / PERPAGE));
         fillData(seachKey, "", PERPAGE, mCurrIndex);
     }
 

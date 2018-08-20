@@ -24,7 +24,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
         if (!originalResponse.headers(COOKIE).isEmpty()) {
             List<String> list = originalResponse.headers().values("Set-Cookie");
             if (list != null || list.size() > 0) {
-                Config.setCookie(list.get(0));
+//                Config.setCookie(list.get(0));
             }
         }
         return originalResponse;

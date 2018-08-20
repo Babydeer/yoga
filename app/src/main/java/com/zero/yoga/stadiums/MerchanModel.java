@@ -1,6 +1,8 @@
 package com.zero.yoga.stadiums;
 
 import android.location.Location;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.zero.yoga.bean.response.MerchanListResponse;
 import com.zero.yoga.utils.LocationUtils;
@@ -9,14 +11,16 @@ import com.zero.yoga.utils.LocationUtils;
  * Created by zero on 2018/8/17.
  */
 
-public class MerchanModel {
+public class MerchanModel implements Parcelable {
 
-    private int id;
+    private long id;
     private String merchantName;
     private String address;
     private String merchantPictureURL;
     private double longitude;
     private double latitude;
+    private String phoneNo;
+    private String businessHours;
 
     private double distance;
 
@@ -32,26 +36,27 @@ public class MerchanModel {
             tmpdis = LocationUtils.gps2m(rowsBean.getLatitude(), rowsBean.getLongitude(), location.getLatitude(), location.getLongitude());
         }
 
-        return new MerchanModel(rowsBean.getId(), rowsBean.getMerchantName(), rowsBean.getAddress(), rowsBean.getMerchantPictureURL(), rowsBean.getLongitude(), rowsBean.getLatitude(), tmpdis);
+        return new MerchanModel(rowsBean.getId(), rowsBean.getMerchantName(), rowsBean.getAddress(), rowsBean.getMerchantPictureURL(), rowsBean.getPhoneNo(), rowsBean.getBusinessHours(), rowsBean.getLongitude(), rowsBean.getLatitude(), tmpdis);
     }
 
-    public MerchanModel(int id, String merchantName, String address, String merchantPictureURL, double longitude, double latitude, double distance) {
+    public MerchanModel(long id, String merchantName, String address, String merchantPictureURL, String phoneNo, String businessHours, double longitude, double latitude, double distance) {
         this.id = id;
         this.merchantName = merchantName;
         this.address = address;
         this.merchantPictureURL = merchantPictureURL;
+        this.phoneNo = phoneNo;
+        this.businessHours = businessHours;
         this.longitude = longitude;
         this.latitude = latitude;
         this.distance = distance;
-        this.distanceStr = getDistanceString(distance)
-        ;
+        this.distanceStr = getDistanceString(distance);
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -104,6 +109,22 @@ public class MerchanModel {
         distanceStr = getDistanceString(distance);
     }
 
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public String getBusinessHours() {
+        return businessHours;
+    }
+
+    public void setBusinessHours(String businessHours) {
+        this.businessHours = businessHours;
+    }
+
     private String getDistanceString(double distance) {
         String ret = "";
         //转为为米
@@ -113,9 +134,9 @@ public class MerchanModel {
         } else if (dis > 100 && dis <= 500) {
             ret = "< 500m";
         } else if (dis > 500 && dis <= 1000) {
-            ret = " < 1Km";
+            ret = " < 1km";
         } else {
-            ret = " > 1Km";
+            ret = " > 1km";
         }
         return ret;
     }
@@ -137,4 +158,48 @@ public class MerchanModel {
                 ", distanceStr='" + distanceStr + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.merchantName);
+        dest.writeString(this.address);
+        dest.writeString(this.merchantPictureURL);
+        dest.writeDouble(this.longitude);
+        dest.writeDouble(this.latitude);
+        dest.writeString(this.phoneNo);
+        dest.writeString(this.businessHours);
+        dest.writeDouble(this.distance);
+        dest.writeString(this.distanceStr);
+    }
+
+    protected MerchanModel(Parcel in) {
+        this.id = in.readLong();
+        this.merchantName = in.readString();
+        this.address = in.readString();
+        this.merchantPictureURL = in.readString();
+        this.longitude = in.readDouble();
+        this.latitude = in.readDouble();
+        this.phoneNo = in.readString();
+        this.businessHours = in.readString();
+        this.distance = in.readDouble();
+        this.distanceStr = in.readString();
+    }
+
+    public static final Parcelable.Creator<MerchanModel> CREATOR = new Parcelable.Creator<MerchanModel>() {
+        @Override
+        public MerchanModel createFromParcel(Parcel source) {
+            return new MerchanModel(source);
+        }
+
+        @Override
+        public MerchanModel[] newArray(int size) {
+            return new MerchanModel[size];
+        }
+    };
 }

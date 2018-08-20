@@ -269,7 +269,7 @@ public class ToastUtils {
             sToast = Toast.makeText(YogoApplication.Companion.getINSTANCE(), text, duration);
             TextView tv = (TextView) sToast.getView().findViewById(android.R.id.message);
             tv.setTextSize(18);
-            sToast.setGravity(Gravity.CENTER, 0, 0);
+//            sToast.setGravity(Gravity.CENTER, 0, 0);
         } else {
             sToast.setText(text);
             sToast.setDuration(duration);
