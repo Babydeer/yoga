@@ -78,6 +78,7 @@ public class UserCenterActivity extends BaseActivity {
                 final ArrayList<String> photos =
                         data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
                 photoPath = photos.get(0);
+                Config.UserInfo.setPhotoPath(photoPath);
                 Logger.t(TAG).i(photoPath);
             }
         }

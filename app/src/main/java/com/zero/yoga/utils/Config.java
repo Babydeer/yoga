@@ -51,6 +51,14 @@ public class Config {
             SpfUtils.putString("nickname", nickname);
         }
 
+        public static String getPhotoPath() {
+            return SpfUtils.getString("photoPath");
+        }
+
+        public static void setPhotoPath(String photoPath) {
+            SpfUtils.putString("photoPath", photoPath);
+        }
+
         public static String getPhoneNo() {
             return SpfUtils.getString("phoneNo");
         }
@@ -74,6 +82,7 @@ public class Config {
             setNickname("");
             setPhoneNo("");
             setUsername("");
+            setPhotoPath("");
         }
     }
 
