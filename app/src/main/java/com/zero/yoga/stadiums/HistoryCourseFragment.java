@@ -13,6 +13,7 @@ import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.orhanobut.logger.Logger;
 import com.zero.yoga.R;
+import com.zero.yoga.adapter.HistoryCourseAdapter;
 import com.zero.yoga.adapter.StadiumListAdapter;
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.base.BaseFragment;
@@ -47,7 +48,7 @@ public class HistoryCourseFragment extends BaseFragment {
 
     private int mCurrIndex = 0;
 
-    private StadiumListAdapter stadiumListAdapter;
+    private HistoryCourseAdapter historyCourseAdapter;
 
     public static HistoryCourseFragment newInstance() {
 //        Bundle args = new Bundle();
@@ -60,14 +61,14 @@ public class HistoryCourseFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @android.support.annotation.Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_stadiumlist, container, false);
+        View root = inflater.inflate(R.layout.fragment_stadium_historycourse, container, false);
         xrecyclerView = root.findViewById(R.id.xrecycler_view);
-        stadiumListAdapter = new StadiumListAdapter(getActivity());
+        historyCourseAdapter = new HistoryCourseAdapter(getActivity());
         xrecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         xrecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         xrecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
         xrecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST));
-        xrecyclerView.setAdapter(stadiumListAdapter);
+        xrecyclerView.setAdapter(historyCourseAdapter);
 
         xrecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -78,7 +79,7 @@ public class HistoryCourseFragment extends BaseFragment {
 
             @Override
             public void onLoadMore() {
-                mCurrIndex = (int) Math.ceil((stadiumListAdapter.getItemCount() / PERPAGE));
+                mCurrIndex = (int) Math.ceil((historyCourseAdapter.getItemCount() / PERPAGE));
                 fetchData();
             }
         });
@@ -88,22 +89,24 @@ public class HistoryCourseFragment extends BaseFragment {
     }
 
     public void fetchData() {
-        fillData( PERPAGE, mCurrIndex);
+        fillData(PERPAGE, mCurrIndex);
     }
 
-    private void fillData( final int perpage, final int nowindex) {
+    private void fillData(final int perpage, final int nowindex) {
 
-        HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseHisCourse(nowindex,perpage)
+        HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseHisCourse(nowindex, perpage)
                 .compose(new RxHelper<HistoryCourseResponse>().io_main((BaseActivity) getActivity(), true))
                 .subscribe(new RxObserver<HistoryCourseResponse>() {
                     @Override
                     public void _onNext(HistoryCourseResponse response) {
-//                        if (xrecyclerView == null || getActivity() == null || response == null || response.getData() == null || stadiumListAdapter == null) {
-//                            return;
-//                        }
+                        if (xrecyclerView == null || getActivity() == null || response == null || response.getData() == null || historyCourseAdapter == null) {
+                            return;
+                        }
                         if (mCurrIndex == 0) {
+                            historyCourseAdapter.setDataList(response.getData().getRows());
                             xrecyclerView.refreshComplete();
                         } else {
+                            historyCourseAdapter.addDataList(response.getData().getRows());
                             xrecyclerView.loadMoreComplete();
                         }
 //                        if (response.getData().getTotal() < PERPAGE) {

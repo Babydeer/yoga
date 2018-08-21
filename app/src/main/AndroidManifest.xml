@@ -63,6 +63,18 @@
             android:name=".mine.AboutActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <service android:name=".mine.UpdateInfoService" />
+
         <meta-data
             android:name="design_width"
             android:value="750" />

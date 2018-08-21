@@ -1,6 +1,8 @@
 package com.zero.yoga.mine;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,8 @@ import com.zero.yoga.base.BaseLazyFragment;
 import com.zero.yoga.stadiums.StadiumHistoryActivity;
 import com.zero.yoga.utils.Config;
 import com.zero.yoga.utils.GlideCircleTransform;
+
+import java.io.File;
 
 /**
  * Created by zero on 2018/8/13.
@@ -95,10 +99,20 @@ public class MineFragment extends BaseFragment {
 
 
     public void initData() {
-        Glide.with(getActivity()).load(Config.UserInfo.getHeaderPicture()).placeholder(R.drawable.personal_ic_pic)
-                .crossFade()
-                .transform(new GlideCircleTransform(getActivity()))
-                .into(ivIcon);
+        Logger.t(TAG).i(Config.UserInfo.toStrings());
+        if (!TextUtils.isEmpty(Config.UserInfo.getPhotoPath())) {
+            Uri uri = Uri.fromFile(new File(Config.UserInfo.getPhotoPath()));
+            Glide.with(getActivity()).load(uri).placeholder(R.drawable.personal_ic_pic)
+                    .crossFade()
+                    .transform(new GlideCircleTransform(getActivity()))
+                    .into(ivIcon);
+        } else {
+            Glide.with(getActivity()).load(Config.UserInfo.getHeaderPicture()).placeholder(R.drawable.personal_ic_pic)
+                    .crossFade()
+                    .transform(new GlideCircleTransform(getActivity()))
+                    .into(ivIcon);
+        }
+
 
         tvPersonalName.setText(Config.UserInfo.getNickname());
         tvPersonalPhoneN0.setText(Config.UserInfo.getPhoneNo());

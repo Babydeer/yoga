@@ -4,6 +4,7 @@ import com.zero.yoga.bean.response.BaseResponse;
 import com.zero.yoga.bean.response.CourseAddResponse;
 import com.zero.yoga.bean.response.CourseDelResponse;
 import com.zero.yoga.bean.response.CourseUpdateResponse;
+import com.zero.yoga.bean.response.FeedbackResponse;
 import com.zero.yoga.bean.response.HistoryCourseResponse;
 import com.zero.yoga.bean.response.LoginResponse;
 import com.zero.yoga.bean.response.LogoutResponse;
@@ -85,7 +86,7 @@ public interface YogaAPI {
 
     @POST("app/suggestion/addOne")
     @FormUrlEncoded
-    Observable<CourseDelResponse> suggestionAddOne(@Field("feedback") String feedback);
+    Observable<FeedbackResponse> suggestionAddOne(@Field("feedback") String feedback);
 
     @POST("app/userCourse/myCourse")
     @FormUrlEncoded
@@ -103,9 +104,9 @@ public interface YogaAPI {
 //    grade	varchar(4)	性别
 //    headerPicture 		头像
 
+    @Multipart
     @POST("app/user/updateUserInfo")
-    @FormUrlEncoded
-    Observable<UpdateUserInfoResponse> updateUserInfo(@Field("offset") int offset, @Field("limit") int limit);
+    Observable<UpdateUserInfoResponse> updateUserInfo(@Part("username") RequestBody username, @Part("nickname") RequestBody nickname, @Part("grade") RequestBody grade, @Part MultipartBody.Part file);
 
 
 //    @Multipart

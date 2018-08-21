@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -60,14 +61,16 @@ public class UserCenterActivity extends BaseActivity {
     private ImageView ivPortrait;
 
     private EditText etName;
-    private EditText etSex;
-    private EditText etPhoneNo;
+    private TextView tvSex;
+    private TextView tvPhoneNo;
 
     private Button btnLogout;
 
     private ArrayList<String> imagePaths = new ArrayList<String>();
 
-    private String photoPath;
+    private String photoPath = "";
+
+    private boolean isUpdate = false;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -77,17 +80,32 @@ public class UserCenterActivity extends BaseActivity {
             if (data != null) {
                 final ArrayList<String> photos =
                         data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
+                if (TextUtils.isEmpty(photoPath) || !TextUtils.equals(photoPath, photos.get(0))) {
+                    isUpdate = true;
+                }
                 photoPath = photos.get(0);
                 Config.UserInfo.setPhotoPath(photoPath);
                 Logger.t(TAG).i(photoPath);
+                Uri uri = Uri.fromFile(new File(photoPath));
+                Glide.with(UserCenterActivity.this).load(uri).placeholder(R.drawable.personal_ic_pic)
+                        .crossFade()
+                        .transform(new GlideCircleTransform(UserCenterActivity.this))
+                        .into(ivPortrait);
             }
         }
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Logger.t(TAG).i(photoPath);//上传用户信息
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (!TextUtils.equals(etName.getText().toString().trim(), Config.UserInfo.getNickname())
+                || isUpdate) {
+            Config.UserInfo.setNickname(etName.getText().toString().trim());
+            Intent intent = new Intent(UserCenterActivity.this, UpdateInfoService.class);
+            startService(intent);
+        }
+
     }
 
 //    private void editPortrait() {
@@ -148,8 +166,8 @@ public class UserCenterActivity extends BaseActivity {
         BackUtils.onBackPress(this, ivBack);
         ivPortrait = findViewById(R.id.ivPortrait);
         etName = findViewById(R.id.etName);
-        etSex = findViewById(R.id.etSex);
-        etPhoneNo = findViewById(R.id.etPhoneNo);
+        tvSex = findViewById(R.id.tvSex);
+        tvPhoneNo = findViewById(R.id.tvPhoneNo);
 
         btnLogout = findViewById(R.id.btnLogout);
 
@@ -174,14 +192,23 @@ public class UserCenterActivity extends BaseActivity {
     }
 
     private void initData() {
-        Glide.with(UserCenterActivity.this).load(Config.UserInfo.getHeaderPicture()).placeholder(R.drawable.personal_ic_pic)
-                .crossFade()
-                .transform(new GlideCircleTransform(UserCenterActivity.this))
-                .into(ivPortrait);
+        if (!TextUtils.isEmpty(Config.UserInfo.getPhotoPath())) {
+            Uri uri = Uri.fromFile(new File(Config.UserInfo.getPhotoPath()));
+            Glide.with(UserCenterActivity.this).load(uri).placeholder(R.drawable.personal_ic_pic)
+                    .crossFade()
+                    .transform(new GlideCircleTransform(UserCenterActivity.this))
+                    .into(ivPortrait);
+        } else {
+            Glide.with(UserCenterActivity.this).load(Config.UserInfo.getHeaderPicture()).placeholder(R.drawable.personal_ic_pic)
+                    .crossFade()
+                    .transform(new GlideCircleTransform(UserCenterActivity.this))
+                    .into(ivPortrait);
+        }
+
 
         etName.setText(Config.UserInfo.getNickname());
-        etPhoneNo.setText(Config.UserInfo.getPhoneNo());
-        etSex.setText(Config.UserInfo.getGrade() == 0 ? "男" : "女");
+        tvPhoneNo.setText(Config.UserInfo.getPhoneNo());
+        tvSex.setText(Config.UserInfo.getGrade() == 0 ? "男" : "女");
 
     }
 

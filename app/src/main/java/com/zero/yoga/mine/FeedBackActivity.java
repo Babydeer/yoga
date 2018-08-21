@@ -81,6 +81,7 @@ public class FeedBackActivity extends BaseActivity {
                             @Override
                             public void _onNext(FeedbackResponse response) {
                                 ToastUtils.showShortToast(response.getMsg());
+                                finish();
                             }
 
                             @Override

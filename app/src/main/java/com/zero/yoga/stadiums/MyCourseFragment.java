@@ -1,10 +1,7 @@
 package com.zero.yoga.stadiums;
 
-import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,23 +10,16 @@ import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.orhanobut.logger.Logger;
 import com.zero.yoga.R;
-import com.zero.yoga.adapter.StadiumListAdapter;
+import com.zero.yoga.adapter.MyCourseAdapter;
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.base.BaseFragment;
-import com.zero.yoga.base.TBaseRecyclerAdapter;
-import com.zero.yoga.bean.response.MerchanListResponse;
 import com.zero.yoga.bean.response.MyCourseResponse;
 import com.zero.yoga.internet.HttpUtils;
 import com.zero.yoga.internet.RxHelper;
 import com.zero.yoga.internet.RxObserver;
 import com.zero.yoga.internet.YogaAPI;
-import com.zero.yoga.utils.ItemClickSupport;
-import com.zero.yoga.utils.LocationUtils;
 import com.zero.yoga.utils.ToastUtils;
 import com.zero.yoga.view.DividerItemDecoration;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -46,7 +36,7 @@ public class MyCourseFragment extends BaseFragment {
 
     private int mCurrIndex = 0;
 
-    private StadiumListAdapter stadiumListAdapter;
+    private MyCourseAdapter myCourseAdapter;
 
     public static MyCourseFragment newInstance() {
 //        Bundle args = new Bundle();
@@ -59,14 +49,14 @@ public class MyCourseFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @android.support.annotation.Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_stadiumlist, container, false);
+        View root = inflater.inflate(R.layout.fragment_stadium_mycourse, container, false);
         xrecyclerView = root.findViewById(R.id.xrecycler_view);
-        stadiumListAdapter = new StadiumListAdapter(getActivity());
+        myCourseAdapter = new MyCourseAdapter(getActivity());
         xrecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         xrecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         xrecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
         xrecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST));
-        xrecyclerView.setAdapter(stadiumListAdapter);
+        xrecyclerView.setAdapter(myCourseAdapter);
 
         xrecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -77,7 +67,7 @@ public class MyCourseFragment extends BaseFragment {
 
             @Override
             public void onLoadMore() {
-                mCurrIndex = (int) Math.ceil((stadiumListAdapter.getItemCount() / PERPAGE));
+                mCurrIndex = (int) Math.ceil((myCourseAdapter.getItemCount() / PERPAGE));
                 fetchData();
             }
         });
@@ -87,22 +77,24 @@ public class MyCourseFragment extends BaseFragment {
     }
 
     public void fetchData() {
-        fillData( PERPAGE, mCurrIndex);
+        fillData(PERPAGE, mCurrIndex);
     }
 
-    private void fillData( final int perpage, final int nowindex) {
+    private void fillData(final int perpage, final int nowindex) {
 
-        HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseMyCourse(nowindex,perpage)
+        HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseMyCourse(nowindex, perpage)
                 .compose(new RxHelper<MyCourseResponse>().io_main((BaseActivity) getActivity(), true))
                 .subscribe(new RxObserver<MyCourseResponse>() {
                     @Override
                     public void _onNext(MyCourseResponse response) {
-//                        if (xrecyclerView == null || getActivity() == null || response == null || response.getData() == null || stadiumListAdapter == null) {
-//                            return;
-//                        }
+                        if (xrecyclerView == null || getActivity() == null || response == null || response.getData() == null || myCourseAdapter == null) {
+                            return;
+                        }
                         if (mCurrIndex == 0) {
+                            myCourseAdapter.setDataList(response.getData().getRows());
                             xrecyclerView.refreshComplete();
                         } else {
+                            myCourseAdapter.addDataList(response.getData().getRows());
                             xrecyclerView.loadMoreComplete();
                         }
 //                        if (response.getData().getTotal() < PERPAGE) {

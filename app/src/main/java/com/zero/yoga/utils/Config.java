@@ -75,8 +75,19 @@ public class Config {
             SpfUtils.putString("username", username);
         }
 
+        public static String toStrings() {
+            return "{UserInfo headerPicture:" + getHeaderPicture() + "\n"
+                    + "grade: " + getGrade() + "\n"
+                    + "nickname: " + getNickname() + "\n"
+                    + "photoPath: " + getPhotoPath() + "\n"
+                    + "phoneNo: " + getPhoneNo() + "\n"
+                    + "username: " + getUsername() + "\n"
+                    + "token: " + Config.geToken() + "\n"
+                    + "}";
+        }
+
         public static void clear() {
-            setToken("");
+            Config.setToken("");
             setHeaderPicture("");
             setGrade(0);
             setNickname("");

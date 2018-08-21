@@ -12,11 +12,18 @@ import com.zero.yoga.base.BaseActivity;
 public class BackUtils {
 
 
-    public static void onBackPress(final BaseActivity activity,final ImageView ivBack){
+    public static void onBackPress(final BaseActivity activity, final ImageView ivBack) {
+        if (ivBack == null || activity == null) {
+            return;
+        }
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (activity == null) {
+                    return;
+                }
                 activity.onBackPressed();
+                activity.finish();
             }
         });
     }
