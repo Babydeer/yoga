@@ -25,6 +25,7 @@ import com.zero.yoga.stadiums.MerchanModel;
 import com.zero.yoga.stadiums.StadiumDetailsActivity;
 import com.zero.yoga.utils.InputUtils;
 import com.zero.yoga.utils.ToastUtils;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.text.SimpleDateFormat;
 
@@ -145,6 +146,7 @@ public class CourseListAdapter extends TBaseRecyclerAdapter<MerCourseResponce.Da
 
         ViewHolder(View view) {
             super(view);
+            AutoUtils.auto(view);
             ivIcon = view.findViewById(R.id.ivIcon);
             tvCourseName = view.findViewById(R.id.tvCourseName);
             tvCourseTime = view.findViewById(R.id.tvCourseTime);

@@ -18,6 +18,7 @@ import com.zero.yoga.base.BaseLazyFragment;
 import com.zero.yoga.stadiums.StadiumHistoryActivity;
 import com.zero.yoga.utils.Config;
 import com.zero.yoga.utils.GlideCircleTransform;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.io.File;
 
@@ -53,7 +54,7 @@ public class MineFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @android.support.annotation.Nullable ViewGroup container, @android.support.annotation.Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_mine, container, false);
-
+        AutoUtils.auto(root);
         ivIcon = root.findViewById(R.id.ivIcon);
         ivSex = root.findViewById(R.id.ivSex);
 

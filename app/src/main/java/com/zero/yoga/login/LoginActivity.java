@@ -154,6 +154,7 @@ public class LoginActivity extends BaseActivity {
                         Config.UserInfo.setUsername(response.getData().getUsername());
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
+                        finish();
                     }
 
                     @Override

@@ -63,4 +63,16 @@
         android:textColor="#505050"
         android:textSize="12sp" />
 
+
+    <TextView
+        android:id="@+id/tvCopyRight"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="50px"
+        android:gravity="bottom"
+        android:text="瑜伽链 版权所有"
+        android:textColor="#999999"
+        android:textSize="12sp" />
+
 </com.zhy.autolayout.AutoLinearLayout>

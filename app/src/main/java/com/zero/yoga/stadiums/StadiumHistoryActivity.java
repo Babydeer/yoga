@@ -19,6 +19,7 @@ import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.base.TBaseRecyclerAdapter;
 import com.zero.yoga.mine.MineFragment;
 import com.zero.yoga.utils.BackUtils;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -52,6 +53,7 @@ public class StadiumHistoryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_stadiumhistory);
+        AutoUtils.auto(getWindow().getDecorView());
         ivBack = findViewById(R.id.ivBack);
         tvSubscribed = findViewById(R.id.tvSubscribed);
         tvHistory = findViewById(R.id.tvHistory);

@@ -22,6 +22,7 @@ import com.zero.yoga.internet.RxObserver;
 import com.zero.yoga.internet.YogaAPI;
 import com.zero.yoga.utils.InputUtils;
 import com.zero.yoga.utils.ToastUtils;
+import com.zhy.autolayout.utils.AutoUtils;
 
 /**
  * Created by zero on 2018/8/14.
@@ -82,6 +83,7 @@ public class HistoryCourseAdapter extends TBaseRecyclerAdapter<HistoryCourseResp
 
         ViewHolder(View view) {
             super(view);
+            AutoUtils.auto(view);
             ivIcon = view.findViewById(R.id.ivIcon);
             tvCourseName = view.findViewById(R.id.tvCourseName);
             tvCourseTime = view.findViewById(R.id.tvCourseTime);

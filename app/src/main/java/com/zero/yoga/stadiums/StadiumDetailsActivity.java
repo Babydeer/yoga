@@ -41,6 +41,7 @@ import com.zero.yoga.utils.BackUtils;
 import com.zero.yoga.utils.BottomNavigationViewHelper;
 import com.zero.yoga.utils.ItemClickSupport;
 import com.zero.yoga.utils.ToastUtils;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -89,6 +90,7 @@ public class StadiumDetailsActivity extends BaseActivity {
         }
 
         setContentView(R.layout.activity_statium_details);
+        AutoUtils.auto(getWindow().getDecorView());
         ivBack = findViewById(R.id.ivBack);
         tvTitle = findViewById(R.id.tvTitle);
         BackUtils.onBackPress(this, ivBack);

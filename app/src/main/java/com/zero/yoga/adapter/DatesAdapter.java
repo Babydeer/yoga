@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.zero.yoga.R;
 import com.zero.yoga.base.TBaseRecyclerAdapter;
 import com.zero.yoga.stadiums.DateBean;
+import com.zhy.autolayout.utils.AutoUtils;
 
 /**
  * Created by zero on 2018/8/14.
@@ -49,6 +50,7 @@ public class DatesAdapter extends TBaseRecyclerAdapter<DateBean> {
 
         ViewHolder(View view) {
             super(view);
+            AutoUtils.auto(view);
             tvMonth = view.findViewById(R.id.tvMonth);
             tvWeek = view.findViewById(R.id.tvWeek);
         }

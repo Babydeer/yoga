@@ -13,6 +13,7 @@ import com.zero.yoga.R;
 import com.zero.yoga.base.TBaseRecyclerAdapter;
 import com.zero.yoga.bean.response.MerchanListResponse;
 import com.zero.yoga.stadiums.MerchanModel;
+import com.zhy.autolayout.utils.AutoUtils;
 
 /**
  * Created by zero on 2018/8/14.
@@ -55,6 +56,7 @@ public class StadiumListAdapter extends TBaseRecyclerAdapter<MerchanModel> {
 
         ViewHolder(View view) {
             super(view);
+            AutoUtils.auto(view);
             ivIcon = view.findViewById(R.id.ivIcon);
             tvStadiumName = view.findViewById(R.id.tvStadiumName);
             tvStadiumAddr = view.findViewById(R.id.tvStadiumAddr);

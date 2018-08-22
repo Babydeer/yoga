@@ -9,7 +9,7 @@
     tools:context="com.zero.yoga.stadiums.StadiumHistoryActivity">
 
 
-    <RelativeLayout
+    <com.zhy.autolayout.AutoRelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="88px"
@@ -24,7 +24,7 @@
             android:paddingEnd="40px"
             android:src="@drawable/nav_ic_back" />
 
-        <LinearLayout
+        <com.zhy.autolayout.AutoLinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -51,10 +51,10 @@
                 android:text="历史"
                 android:textColor="#121212"
                 android:textSize="18sp" />
-        </LinearLayout>
+        </com.zhy.autolayout.AutoLinearLayout>
 
 
-    </RelativeLayout>
+    </com.zhy.autolayout.AutoRelativeLayout>
 
 
     <View

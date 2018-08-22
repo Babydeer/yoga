@@ -44,7 +44,7 @@ public class HistoryCourseFragment extends BaseFragment {
 
     private XRecyclerView xrecyclerView;
 
-    private static int PERPAGE = 10;
+    private static int PERPAGE = 20;
 
     private int mCurrIndex = 0;
 

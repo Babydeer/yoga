@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.zero.yoga.R;
 import com.zero.yoga.base.TBaseRecyclerAdapter;
+import com.zhy.autolayout.utils.AutoUtils;
 
 /**
  * Created by zero on 2018/8/14.
@@ -44,6 +45,7 @@ public class TestAdapter extends TBaseRecyclerAdapter<String> {
 
         ViewHolder(View view) {
             super(view);
+            AutoUtils.auto(view);
             tvTest = view.findViewById(R.id.tvTest);
         }
     }
