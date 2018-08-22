@@ -82,7 +82,7 @@ public class CourseListAdapter extends TBaseRecyclerAdapter<MerCourseResponce.Da
                 if (data == null || mContext == null) {
                     return;
                 }
-                HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseDeleteById(data.getCourseId())
+                HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseDeleteById(data.getId())
                         .compose(new RxHelper<CourseDelResponse>().io_main((BaseActivity) mContext, true))
                         .subscribe(new RxObserver<CourseDelResponse>() {
                             @Override
