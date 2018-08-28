@@ -84,7 +84,7 @@ public class MyCourseFragment extends BaseFragment {
 
         HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseMyCourse(nowindex, perpage)
                 .compose(new RxHelper<MyCourseResponse>().io_main((BaseActivity) getActivity(), true))
-                .subscribe(new RxObserver<MyCourseResponse>() {
+                .subscribe(new RxObserver<MyCourseResponse>((BaseActivity) getActivity()) {
                     @Override
                     public void _onNext(MyCourseResponse response) {
                         if (xrecyclerView == null || getActivity() == null || response == null || response.getData() == null || myCourseAdapter == null) {

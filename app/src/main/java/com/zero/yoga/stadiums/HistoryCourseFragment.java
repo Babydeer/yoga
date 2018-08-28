@@ -96,7 +96,7 @@ public class HistoryCourseFragment extends BaseFragment {
 
         HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseHisCourse(nowindex, perpage)
                 .compose(new RxHelper<HistoryCourseResponse>().io_main((BaseActivity) getActivity(), true))
-                .subscribe(new RxObserver<HistoryCourseResponse>() {
+                .subscribe(new RxObserver<HistoryCourseResponse>((BaseActivity) getActivity()) {
                     @Override
                     public void _onNext(HistoryCourseResponse response) {
                         if (xrecyclerView == null || getActivity() == null || response == null || response.getData() == null || historyCourseAdapter == null) {

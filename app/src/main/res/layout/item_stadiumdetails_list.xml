@@ -29,9 +29,9 @@
         android:layout_height="36px"
         android:layout_alignTop="@+id/ivIcon"
         android:layout_marginStart="20px"
-        android:visibility="gone"
         android:layout_toEndOf="@+id/tvCourseName"
-        android:src="@drawable/list_ic_qian" />
+        android:src="@drawable/list_ic_qian"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tvCourseTime"
@@ -76,15 +76,15 @@
         android:background="@drawable/shape_button_cancel"
         android:text="取消"
         android:textColor="#121212"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btnSubscribe"
         android:layout_width="95px"
         android:layout_height="50px"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="12px"
-        android:layout_toStartOf="@+id/btnCancel"
         android:background="@drawable/shape_button_subscribe"
         android:text="预约"
         android:textColor="#ffffff"

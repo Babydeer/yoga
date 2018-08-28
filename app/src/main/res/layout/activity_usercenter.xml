@@ -144,10 +144,11 @@
 
         <TextView
             android:id="@+id/tvSex"
-            android:layout_width="wrap_content"
+            android:layout_width="400px"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/ivRight2"
+            android:gravity="center_vertical|end"
             android:background="@null"
             android:textColor="#909090"
             android:textSize="14sp"

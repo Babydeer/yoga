@@ -162,7 +162,7 @@ public class StadiumListFragment extends BaseFragment {
 
         HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).merchantSelectByPage(merchanName, username, nowindex, perpage)
                 .compose(new RxHelper<MerchanListResponse>().io_main((BaseActivity) getActivity(), true))
-                .subscribe(new RxObserver<MerchanListResponse>() {
+                .subscribe(new RxObserver<MerchanListResponse>((BaseActivity) getActivity()) {
                     @Override
                     public void _onNext(MerchanListResponse response) {
                         if (xrecyclerView == null || getActivity() == null || response == null || response.getData() == null || stadiumListAdapter == null) {

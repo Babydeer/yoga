@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.zero.yoga.base.BasePermissionsActivity
 import com.zero.yoga.login.LoginActivity
+import com.zero.yoga.utils.Config
 import org.jetbrains.anko.startActivity
 
 /**
@@ -30,7 +31,11 @@ class SplashActivity : BasePermissionsActivity() {
     }
 
     fun jumps() {
-        startActivity<LoginActivity>()
+        if (Config.UserInfo.getLogin()) {
+            startActivity<MainActivity>()
+        } else {
+            startActivity<LoginActivity>()
+        }
         finish()
     }
 

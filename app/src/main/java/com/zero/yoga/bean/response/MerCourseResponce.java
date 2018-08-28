@@ -70,7 +70,7 @@ public class MerCourseResponce extends BaseResponse {
             private long startTime;
             private long endTime;
             private int signNum;
-            private String orderFlag;
+            private int orderFlag;
             private String courseUrl;
 
             public long getId() {
@@ -137,11 +137,11 @@ public class MerCourseResponce extends BaseResponse {
                 this.signNum = signNum;
             }
 
-            public String getOrderFlag() {
+            public int getOrderFlag() {
                 return orderFlag;
             }
 
-            public void setOrderFlag(String orderFlag) {
+            public void setOrderFlag(int orderFlag) {
                 this.orderFlag = orderFlag;
             }
 

@@ -7,10 +7,10 @@ package com.zero.yoga.bean.response;
 public class BaseResponse {
 
     private boolean success;
-    private String code;
+    private int code;
     private String msg;
 
-    public BaseResponse(boolean success, String code, String msg) {
+    public BaseResponse(boolean success, int code, String msg) {
         this.success = success;
         this.code = code;
         this.msg = msg;
@@ -27,11 +27,11 @@ public class BaseResponse {
         this.success = success;
     }
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

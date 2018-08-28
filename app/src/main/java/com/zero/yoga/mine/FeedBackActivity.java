@@ -77,7 +77,7 @@ public class FeedBackActivity extends BaseActivity {
 
                 HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).suggestionAddOne(feedback)
                         .compose(new RxHelper<FeedbackResponse>().io_main(FeedBackActivity.this, true))
-                        .subscribe(new RxObserver<FeedbackResponse>() {
+                        .subscribe(new RxObserver<FeedbackResponse>(FeedBackActivity.this) {
                             @Override
                             public void _onNext(FeedbackResponse response) {
                                 ToastUtils.showShortToast(response.getMsg());

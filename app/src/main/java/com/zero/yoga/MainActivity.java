@@ -11,10 +11,14 @@ import android.widget.TextView;
 
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.mine.MineFragment;
+import com.zero.yoga.mine.UpdateInfoEvent;
 import com.zero.yoga.stadiums.StadiumFragment;
 import com.zero.yoga.stadiums.StadiumSearchActivity;
 import com.zero.yoga.utils.BottomNavigationViewHelper;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -35,7 +39,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        EventBus.getDefault().register(this);
         setContentView(R.layout.activity_main);
         viewPager = findViewById(R.id.viewpager);
         tvTitle = findViewById(R.id.tvTitle);
@@ -106,11 +110,24 @@ public class MainActivity extends BaseActivity {
         setupViewPager(viewPager);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void UpdateInfoEventBus(UpdateInfoEvent updateInfoEvent) {
+        mineFragment.initData();
+    }
+
+    private MineFragment mineFragment = MineFragment.newInstance();
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         adapter.addFragment(StadiumFragment.newInstance());
-        adapter.addFragment(MineFragment.newInstance());
+        adapter.addFragment(mineFragment);
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

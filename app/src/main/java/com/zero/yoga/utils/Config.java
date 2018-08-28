@@ -75,6 +75,14 @@ public class Config {
             SpfUtils.putString("username", username);
         }
 
+        public static boolean getLogin() {
+            return SpfUtils.getBoolean("login");
+        }
+
+        public static void setLogin(boolean login) {
+            SpfUtils.putBoolean("login", login);
+        }
+
         public static String toStrings() {
             return "{UserInfo headerPicture:" + getHeaderPicture() + "\n"
                     + "grade: " + getGrade() + "\n"
@@ -94,6 +102,7 @@ public class Config {
             setPhoneNo("");
             setUsername("");
             setPhotoPath("");
+            setLogin(false);
         }
     }
 

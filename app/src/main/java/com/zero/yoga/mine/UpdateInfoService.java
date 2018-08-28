@@ -14,6 +14,8 @@ import com.zero.yoga.internet.YogaAPI;
 import com.zero.yoga.utils.Config;
 import com.zero.yoga.utils.ToastUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.File;
 
 import okhttp3.MediaType;
@@ -32,8 +34,9 @@ public class UpdateInfoService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-
-        updateInfo();
+        final String nickName = intent.getStringExtra("nickName");
+        final int grader = intent.getIntExtra("grader", 0);
+        updateInfo(nickName, grader);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -41,7 +44,7 @@ public class UpdateInfoService extends IntentService {
         }
     }
 
-    private void updateInfo() {
+    private void updateInfo(final String nickName, final int grader) {
         File file = new File(Config.UserInfo.getPhotoPath());
         RequestBody requestFile = RequestBody.create(MediaType.parse("application/otcet-stream"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("headerPicture", "headerPicture", requestFile);
@@ -53,6 +56,9 @@ public class UpdateInfoService extends IntentService {
                     @Override
                     public void _onNext(UpdateUserInfoResponse response) {
                         Logger.t("update").i(response.getMsg());
+                        Config.UserInfo.setNickname(nickName);
+                        Config.UserInfo.setGrade(grader);
+                        EventBus.getDefault().post(new UpdateInfoEvent());
                     }
 
                     @Override

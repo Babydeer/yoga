@@ -152,6 +152,7 @@ public class LoginActivity extends BaseActivity {
                         Config.UserInfo.setNickname(response.getData().getNickname());
                         Config.UserInfo.setPhoneNo(response.getData().getPhoneNo());
                         Config.UserInfo.setUsername(response.getData().getUsername());
+                        Config.UserInfo.setLogin(true);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();

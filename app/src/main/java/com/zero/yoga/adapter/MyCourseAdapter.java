@@ -1,6 +1,7 @@
 package com.zero.yoga.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.zero.yoga.internet.RxHelper;
 import com.zero.yoga.internet.RxObserver;
 import com.zero.yoga.internet.YogaAPI;
 import com.zero.yoga.stadiums.MerchanModel;
+import com.zero.yoga.utils.DialogUtils;
 import com.zero.yoga.utils.InputUtils;
 import com.zero.yoga.utils.ToastUtils;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -64,13 +66,62 @@ public class MyCourseAdapter extends TBaseRecyclerAdapter<MyCourseResponse.DataB
         vholder.tvStudentNum.setText(data.getSignNum() + "");
         vholder.tvCourseTime.setText(getTime(data.getStartTime(), data.getEndTime()));
         vholder.btnQian.setTag(data);
+        vholder.btnCancel.setTag(data);
         if (data.getSignFlag() == 0) {//未签到
             vholder.btnQian.setVisibility(View.VISIBLE);
             vholder.ivQian.setVisibility(View.GONE);
+            vholder.btnCancel.setVisibility(View.VISIBLE);
         } else {
             vholder.btnQian.setVisibility(View.GONE);
             vholder.ivQian.setVisibility(View.VISIBLE);
+            vholder.btnCancel.setVisibility(View.GONE);
         }
+
+        vholder.btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MyCourseResponse.DataBean.RowsBean data = (MyCourseResponse.DataBean.RowsBean) view.getTag();
+                if (!(mContext instanceof BaseActivity)) {
+                    return;
+                }
+                BaseActivity baseActivity = (BaseActivity) mContext;
+                if (baseActivity.isFinishing()) {
+                    return;
+                }
+                if (data == null || mContext == null) {
+                    return;
+                }
+
+                DialogUtils.showNormalDialog((BaseActivity) mContext, R.mipmap.yogachain_ic, "Yogo", "确定要取消签到吗?", "确定", "取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseDeleteById(data.getMerCourId())
+                                .compose(new RxHelper<CourseDelResponse>().io_main((BaseActivity) mContext, true))
+                                .subscribe(new RxObserver<CourseDelResponse>() {
+                                    @Override
+                                    public void _onNext(CourseDelResponse response) {
+                                        ToastUtils.showShortToast(response.getMsg());
+                                        removeData(data);
+                                    }
+
+                                    @Override
+                                    public void _onError(String msg) {
+                                        ToastUtils.showShortToast(msg);
+                                    }
+                                });
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+
+
+            }
+        });
+
         vholder.btnQian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +137,7 @@ public class MyCourseAdapter extends TBaseRecyclerAdapter<MyCourseResponse.DataB
                     return;
                 }
                 vholder.ivQian.setVisibility(View.VISIBLE);
-                HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseUpdateStatus(data.getId(), "1")
+                HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseUpdateStatus(data.getMerCourId(), "1")
                         .compose(new RxHelper<CourseUpdateResponse>().io_main((BaseActivity) mContext, true))
                         .subscribe(new RxObserver<CourseUpdateResponse>() {
                             @Override
@@ -114,6 +165,7 @@ public class MyCourseAdapter extends TBaseRecyclerAdapter<MyCourseResponse.DataB
         public TextView tvCoachName;
         public TextView tvStudentNum;
         public ImageView ivQian;
+        public Button btnCancel;
 
         public Button btnQian;
 
@@ -127,6 +179,7 @@ public class MyCourseAdapter extends TBaseRecyclerAdapter<MyCourseResponse.DataB
             tvStudentNum = view.findViewById(R.id.tvStudentNum);
             ivQian = view.findViewById(R.id.ivQian);
             btnQian = view.findViewById(R.id.btnQian);
+            btnCancel = view.findViewById(R.id.btnCancel);
         }
 
     }

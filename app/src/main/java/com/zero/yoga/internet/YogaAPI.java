@@ -67,7 +67,7 @@ public interface YogaAPI {
 
     @POST("app/merCourse/selectByDate")
     @FormUrlEncoded
-    Observable<MerCourseResponce> merCourseSelectByPage(@Field("merchantId") long merchantId, @Field("queryDate") String queryDate);
+    Observable<MerCourseResponce> merCourseSelectByDate(@Field("merchantId") long merchantId, @Field("queryDate") String queryDate);
 
 
     @POST("app/userCourse/addOne")

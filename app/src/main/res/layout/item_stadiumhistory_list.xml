@@ -67,6 +67,7 @@
         tools:text="62人" />
 
 
+
     <Button
         android:id="@+id/btnQian"
         android:layout_width="95px"
@@ -77,6 +78,19 @@
         android:text="签到"
         android:textColor="#ffffff"
         android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="95px"
+        android:layout_height="50px"
+        android:layout_toStartOf="@+id/btnQian"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="12px"
+        android:background="@drawable/shape_button_cancel"
+        android:text="取消"
+        android:textColor="#121212"
+        android:textSize="12sp"
+        android:visibility="gone" />
 
 
 </com.zhy.autolayout.AutoRelativeLayout>

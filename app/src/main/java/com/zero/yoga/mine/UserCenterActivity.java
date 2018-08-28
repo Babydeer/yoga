@@ -1,6 +1,7 @@
 package com.zero.yoga.mine;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -20,6 +21,7 @@ import com.orhanobut.logger.Logger;
 import com.zero.yoga.R;
 import com.zero.yoga.base.BaseActivity;
 import com.zero.yoga.base.TBaseRecyclerAdapter;
+import com.zero.yoga.bean.response.CourseDelResponse;
 import com.zero.yoga.bean.response.HistoryCourseResponse;
 import com.zero.yoga.bean.response.LogoutResponse;
 import com.zero.yoga.internet.HttpUtils;
@@ -31,6 +33,7 @@ import com.zero.yoga.stadiums.DateBean;
 import com.zero.yoga.stadiums.DateFactory;
 import com.zero.yoga.utils.BackUtils;
 import com.zero.yoga.utils.Config;
+import com.zero.yoga.utils.DialogUtils;
 import com.zero.yoga.utils.GlideCircleTransform;
 import com.zero.yoga.utils.ToastUtils;
 
@@ -72,6 +75,8 @@ public class UserCenterActivity extends BaseActivity {
 
     private boolean isUpdate = false;
 
+    private int grader = 0;//默认为男
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -98,11 +103,13 @@ public class UserCenterActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        if (!TextUtils.equals(etName.getText().toString().trim(), Config.UserInfo.getNickname())
-                || isUpdate) {
-            Config.UserInfo.setNickname(etName.getText().toString().trim());
+        final String nickName = etName.getText().toString().trim();
+        if (!TextUtils.equals(nickName, Config.UserInfo.getNickname())
+                || isUpdate
+                || Config.UserInfo.getGrade() != grader) {
             Intent intent = new Intent(UserCenterActivity.this, UpdateInfoService.class);
+            intent.putExtra("nickName", nickName);
+            intent.putExtra("grader", grader);
             startService(intent);
         }
 
@@ -182,10 +189,41 @@ public class UserCenterActivity extends BaseActivity {
 
         initData();
 
+        tvSex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String[] sexs = {"男", "女"};
+                DialogUtils.showListDialog(UserCenterActivity.this, sexs, "请选择性别", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (i == 0) {//男
+                            grader = 0;
+                            tvSex.setText("男");
+
+                        } else {
+                            grader = 1;
+                            tvSex.setText("女");
+                        }
+                    }
+                });
+            }
+        });
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                doLogout();
+                //取消弹框提示
+                DialogUtils.showNormalDialog(UserCenterActivity.this, R.mipmap.yogachain_ic, "Yogo", "确定要退出吗?", "确定", "取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        doLogout();
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
             }
         });
 

@@ -4,42 +4,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.jcodecraeer.xrecyclerview.ProgressStyle;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.orhanobut.logger.Logger;
 import com.zero.yoga.R;
-import com.zero.yoga.ViewPagerAdapter;
 import com.zero.yoga.adapter.CourseListAdapter;
-import com.zero.yoga.adapter.DatesAdapter;
-import com.zero.yoga.adapter.StadiumListAdapter;
 import com.zero.yoga.base.BaseActivity;
-import com.zero.yoga.base.TBaseRecyclerAdapter;
 import com.zero.yoga.bean.response.MerCourseResponce;
-import com.zero.yoga.bean.response.MerchanListResponse;
 import com.zero.yoga.internet.HttpUtils;
 import com.zero.yoga.internet.RxHelper;
 import com.zero.yoga.internet.RxObserver;
 import com.zero.yoga.internet.YogaAPI;
-import com.zero.yoga.mine.MineFragment;
 import com.zero.yoga.utils.BackUtils;
-import com.zero.yoga.utils.BottomNavigationViewHelper;
-import com.zero.yoga.utils.ItemClickSupport;
 import com.zero.yoga.utils.ToastUtils;
 import com.zhy.autolayout.utils.AutoUtils;
 
@@ -189,7 +172,7 @@ public class StadiumDetailsActivity extends BaseActivity {
         final DateBean dateBean = tabs.get(position);
         Logger.t(TAG).i(dateBean.toString());
 
-        HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).merCourseSelectByPage(mMerchanModel.getId(), dateBean.getDateformat())
+        HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).merCourseSelectByDate(mMerchanModel.getId(), dateBean.getDateformat())
                 .compose(new RxHelper<MerCourseResponce>().io_main(StadiumDetailsActivity.this, true))
                 .subscribe(new RxObserver<MerCourseResponce>() {
                     @Override

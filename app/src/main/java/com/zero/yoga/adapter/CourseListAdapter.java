@@ -1,6 +1,7 @@
 package com.zero.yoga.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.zero.yoga.internet.RxObserver;
 import com.zero.yoga.internet.YogaAPI;
 import com.zero.yoga.stadiums.MerchanModel;
 import com.zero.yoga.stadiums.StadiumDetailsActivity;
+import com.zero.yoga.utils.DialogUtils;
 import com.zero.yoga.utils.InputUtils;
 import com.zero.yoga.utils.ToastUtils;
 import com.zhy.autolayout.utils.AutoUtils;
@@ -69,6 +71,18 @@ public class CourseListAdapter extends TBaseRecyclerAdapter<MerCourseResponce.Da
         vholder.btnSubscribe.setTag(data);
         vholder.btnCancel.setTag(data);
 
+        if (data.getOrderFlag() == 0) {//未预约
+            vholder.btnSubscribe.setVisibility(View.VISIBLE);
+            vholder.btnCancel.setVisibility(View.GONE);
+        } else {
+            vholder.btnSubscribe.setVisibility(View.GONE);
+            vholder.btnCancel.setVisibility(View.VISIBLE);
+        }
+
+        if (System.currentTimeMillis() > data.getStartTime()) {//已经开始上课了 ,不能取消
+            vholder.btnCancel.setVisibility(View.GONE);
+        }
+
         vholder.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,19 +97,36 @@ public class CourseListAdapter extends TBaseRecyclerAdapter<MerCourseResponce.Da
                 if (data == null || mContext == null) {
                     return;
                 }
-                HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseDeleteById(data.getId())
-                        .compose(new RxHelper<CourseDelResponse>().io_main((BaseActivity) mContext, true))
-                        .subscribe(new RxObserver<CourseDelResponse>() {
-                            @Override
-                            public void _onNext(CourseDelResponse response) {
-                                ToastUtils.showShortToast(response.getMsg());
-                            }
 
-                            @Override
-                            public void _onError(String msg) {
-                                ToastUtils.showShortToast(msg);
-                            }
-                        });
+                //取消弹框提示
+                DialogUtils.showNormalDialog((BaseActivity) mContext, R.mipmap.yogachain_ic, "Yogo", "确定要取消预约吗?", "确定", "取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        vholder.btnSubscribe.setVisibility(View.VISIBLE);
+                        vholder.btnCancel.setVisibility(View.GONE);
+                        HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseDeleteById(data.getId())
+                                .compose(new RxHelper<CourseDelResponse>().io_main((BaseActivity) mContext, true))
+                                .subscribe(new RxObserver<CourseDelResponse>() {
+                                    @Override
+                                    public void _onNext(CourseDelResponse response) {
+                                        ToastUtils.showShortToast(response.getMsg());
+                                    }
+
+                                    @Override
+                                    public void _onError(String msg) {
+                                        ToastUtils.showShortToast(msg);
+                                        vholder.btnSubscribe.setVisibility(View.GONE);
+                                        vholder.btnCancel.setVisibility(View.VISIBLE);
+                                    }
+                                });
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
             }
         });
 
@@ -113,7 +144,13 @@ public class CourseListAdapter extends TBaseRecyclerAdapter<MerCourseResponce.Da
                 if (data == null || mContext == null) {
                     return;
                 }
-                HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseAddOne(data.getCourseId())
+                vholder.btnSubscribe.setVisibility(View.GONE);
+                vholder.btnCancel.setVisibility(View.VISIBLE);
+                if (System.currentTimeMillis() > data.getStartTime()) {//已经开始上课了 ,不能取消
+                    vholder.btnCancel.setVisibility(View.GONE);
+                }
+
+                HttpUtils.getOnlineCookieRetrofit().create(YogaAPI.class).userCourseAddOne(data.getId())
                         .compose(new RxHelper<CourseAddResponse>().io_main((BaseActivity) mContext, true))
                         .subscribe(new RxObserver<CourseAddResponse>() {
                             @Override
@@ -124,6 +161,8 @@ public class CourseListAdapter extends TBaseRecyclerAdapter<MerCourseResponce.Da
                             @Override
                             public void _onError(String msg) {
                                 ToastUtils.showShortToast(msg);
+                                vholder.btnSubscribe.setVisibility(View.VISIBLE);
+                                vholder.btnCancel.setVisibility(View.GONE);
                             }
                         });
 
