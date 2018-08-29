@@ -70,7 +70,7 @@ public class MyCourseAdapter extends TBaseRecyclerAdapter<MyCourseResponse.DataB
         if (data.getSignFlag() == 0) {//未签到
             vholder.btnQian.setVisibility(View.VISIBLE);
             vholder.ivQian.setVisibility(View.GONE);
-            vholder.btnCancel.setVisibility(View.VISIBLE);
+            vholder.btnCancel.setVisibility(View.GONE);
         } else {
             vholder.btnQian.setVisibility(View.GONE);
             vholder.ivQian.setVisibility(View.VISIBLE);
