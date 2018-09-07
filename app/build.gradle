@@ -46,7 +46,7 @@ android {
                         substring(1) : variant.flavorName
 
                 def apkFile = new File(
-                        "Yoga_${flavorName}_${variant.versionName}_${buildTime()}.apk"
+                        "Yoga_${flavorName}_${variant.versionName}_${buildTime()}_release.apk"
                 )
                 outputFileName = apkFile
             }
@@ -67,7 +67,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "BUILD_NAME", "\"${build_name}\""
             signingConfig signingConfigs.release

@@ -3,6 +3,7 @@ package com.zero.yoga.mine;
 import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.orhanobut.logger.Logger;
 import com.zero.yoga.bean.response.FeedbackResponse;
@@ -45,10 +46,14 @@ public class UpdateInfoService extends IntentService {
     }
 
     private void updateInfo(final String nickName, final int grader) {
-        File file = new File(Config.UserInfo.getPhotoPath());
-        Logger.t("update").d(file.getAbsoluteFile());
-        RequestBody requestFile = RequestBody.create(MediaType.parse("application/otcet-stream"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("headerPicture", "headerPicture", requestFile);
+
+        MultipartBody.Part body = null;
+        if (!TextUtils.isEmpty(Config.UserInfo.getPhotoPath())) {
+            File file = new File(Config.UserInfo.getPhotoPath());
+            Logger.t("update").e("file=%s ", file);
+            RequestBody requestFile = RequestBody.create(MediaType.parse("application/otcet-stream"), file);
+            body = MultipartBody.Part.createFormData("headerPicture", "headerPicture", requestFile);
+        }
         RequestBody username = RequestBody.create(MediaType.parse("multipart/form-data"), Config.UserInfo.getUsername());
         RequestBody nickname = RequestBody.create(MediaType.parse("multipart/form-data"), Config.UserInfo.getNickname());
         RequestBody grade = RequestBody.create(MediaType.parse("multipart/form-data"), Config.UserInfo.getGrade() + "");
