@@ -3,6 +3,7 @@ package com.zero.yoga.stadiums;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import com.zero.yoga.internet.RxHelper;
 import com.zero.yoga.internet.RxObserver;
 import com.zero.yoga.internet.YogaAPI;
 import com.zero.yoga.utils.BackUtils;
+import com.zero.yoga.utils.MapUtils;
 import com.zero.yoga.utils.ToastUtils;
 import com.zhy.autolayout.utils.AutoUtils;
 
@@ -83,6 +85,20 @@ public class StadiumDetailsActivity extends BaseActivity {
         tvStadiumLoc = findViewById(R.id.tvStadiumLoc);
         tvStadiumTime = findViewById(R.id.tvStadiumTime);
 
+        tvStadiumTel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callPhone(mMerchanModel.getPhoneNo());
+            }
+        });
+
+        tvStadiumLoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MapUtils.goToMap(StadiumDetailsActivity.this, mMerchanModel.getLatitude(), mMerchanModel.getLongitude(), mMerchanModel.getAddress());
+            }
+        });
+
         tl = findViewById(R.id.tl);
         xrecyclerView = findViewById(R.id.xrecycler_view);
         initXRecyclerView();
@@ -91,6 +107,18 @@ public class StadiumDetailsActivity extends BaseActivity {
         initData();
         initTabLayout();
         updateXRecyclerView(0);
+    }
+
+    /**
+     * 拨打电话（跳转到拨号界面，用户手动点击拨打）
+     *
+     * @param phoneNum 电话号码
+     */
+    private void callPhone(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        startActivity(intent);
     }
 
     private void initData() {

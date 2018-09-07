@@ -40,7 +40,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="174px"
+        android:layout_height="200px"
         android:layout_marginBottom="18px"
         android:layout_marginHorizontal="24px"
         android:layout_marginTop="26px">
@@ -50,6 +50,7 @@
             android:layout_width="180px"
             android:layout_height="180px"
             android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:src="@mipmap/yogachain_ic" />
 
         <TextView
@@ -58,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/ivIcon"
             android:layout_marginStart="20px"
-            android:layout_marginTop="12px"
+            android:layout_marginTop="8px"
             android:layout_toEndOf="@+id/ivIcon"
             android:textColor="#333333"
             android:textSize="15sp"
@@ -69,8 +70,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvStadiumName"
+            android:layout_marginBottom="10px"
             android:layout_marginStart="20px"
-            android:layout_marginTop="20px"
+            android:layout_marginTop="10px"
             android:layout_toEndOf="@+id/ivIcon"
             android:drawableLeft="@drawable/list_ic_tel"
             android:drawablePadding="8px"
@@ -83,11 +85,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvStadiumName"
+            android:layout_marginBottom="10px"
             android:layout_marginStart="60px"
-            android:layout_marginTop="20px"
+            android:layout_marginTop="10px"
             android:layout_toEndOf="@+id/tvStadiumTel"
             android:drawableLeft="@drawable/list_ic_location"
             android:drawablePadding="8px"
+            android:ellipsize="end"
+            android:lines="1"
             android:textColor="#505050"
             android:textSize="12sp"
             tools:text="宝安中心区 10Km以内" />
@@ -96,9 +101,9 @@
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:layout_below="@+id/tvStadiumTel"
+            android:layout_below="@+id/tvStadiumLoc"
             android:layout_marginStart="20px"
-            android:layout_marginTop="20px"
+            android:layout_marginTop="10px"
             android:layout_toEndOf="@+id/ivIcon"
             android:background="#eeeeee" />
 
@@ -107,10 +112,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/ivIcon"
+            android:layout_below="@+id/line"
             android:layout_marginStart="20px"
             android:layout_toEndOf="@+id/ivIcon"
             android:drawableLeft="@drawable/list_ic_time"
             android:drawablePadding="8px"
+            android:gravity="center_vertical"
             android:textColor="#808080"
             android:textSize="10sp"
             tools:text="营业时间 9:00 - 22:00" />

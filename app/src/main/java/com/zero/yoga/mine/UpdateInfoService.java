@@ -46,6 +46,7 @@ public class UpdateInfoService extends IntentService {
 
     private void updateInfo(final String nickName, final int grader) {
         File file = new File(Config.UserInfo.getPhotoPath());
+        Logger.t("update").d(file.getAbsoluteFile());
         RequestBody requestFile = RequestBody.create(MediaType.parse("application/otcet-stream"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("headerPicture", "headerPicture", requestFile);
         RequestBody username = RequestBody.create(MediaType.parse("multipart/form-data"), Config.UserInfo.getUsername());

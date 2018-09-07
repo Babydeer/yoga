@@ -77,11 +77,11 @@ public interface YogaAPI {
 
     @POST("app/userCourse/deleteById")
     @FormUrlEncoded
-    Observable<CourseDelResponse> userCourseDeleteById(@Field("id") long id);
+    Observable<CourseDelResponse> userCourseDeleteById(@Field("merCourId") long merCourId);
 
     @POST("app/userCourse/updateStatus")
     @FormUrlEncoded
-    Observable<CourseUpdateResponse> userCourseUpdateStatus(@Field("id") long id, @Field("status") String status);
+    Observable<CourseUpdateResponse> userCourseUpdateStatus(@Field("merCourId") long merCourId, @Field("status") String status);
 
 
     @POST("app/suggestion/addOne")

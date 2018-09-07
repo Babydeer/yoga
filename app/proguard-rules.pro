@@ -47,6 +47,8 @@
 # 保护注解
 -keepattributes *Annotation*
 
+-ignorewarnings
+
 # 抛出异常时保留代码行号
 -keepattributes SourceFile,LineNumberTable
 
@@ -70,9 +72,17 @@
 -dontwarn org.apache.http.**
 -keep class org.apache.http.** { *;}
 
+#rx
+-dontwarn io.reactivex.**
+-keep class io.reactivex.** { *; }
+-dontwarn com.jakewharton.rxbinding.**
+-keep class com.jakewharton.rxbinding2.** { *; }
+
+
 #okhttp3.x
 -dontwarn com.squareup.okhttp3.**
--keep class com.squareup.okhttp3.** { *;}
+-keep class com.squareup.okhttp3.* { *;}
+-dontwarn okio.**
 
 #bugly
 -dontwarn com.tencent.bugly.**
@@ -128,28 +138,56 @@ public static *** w(...);
 }
 
 #EventBus
+-dontwarn
 -keepclassmembers class ** {
     public void onEvent*(**);
 }
+-dontwarn
 -keepclassmembers class ** {
 public void xxxxxx(**);
 }
 
+-keepattributes *Annotation*
+-keepclassmembers class ** {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+
+# Only required if you use AsyncExecutor
+-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
+    <init>(java.lang.Throwable);
+}
+
 
 #glide
+-dontwarn
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
   **[] $VALUES;
   public *;
 }
 
+-dontwarn
 -keep class com.zero.yoga.bean.response.** { *; }
+
+-dontwarn
+-keep class com.zero.yoga.internet.** { *; }
 
 #retrofit2.x
 -dontwarn retrofit2.**
 -keep class retrofit2.** { *; }
 -keepattributes Signature
 -keepattributes Exceptions
+
+# Retrofit
+-dontnote retrofit2.Platform
+-dontnote retrofit2.Platform$IOS$MainThreadExecutor
+-dontwarn retrofit2.Platform$Java8
+-keepattributes Signature
+-keepattributes Exceptions
+
+# okhttp
+-dontwarn okio.**
 
 # 保留 R 下面的资源
 -keep class **.R$* {*;}

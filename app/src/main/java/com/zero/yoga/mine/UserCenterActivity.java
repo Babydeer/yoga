@@ -243,7 +243,7 @@ public class UserCenterActivity extends BaseActivity {
                     .into(ivPortrait);
         }
 
-
+        Logger.t(TAG).d("nickname: "+ Config.UserInfo.getNickname());
         etName.setText(Config.UserInfo.getNickname());
         tvPhoneNo.setText(Config.UserInfo.getPhoneNo());
         tvSex.setText(Config.UserInfo.getGrade() == 0 ? "男" : "女");
