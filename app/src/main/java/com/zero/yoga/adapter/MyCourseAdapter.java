@@ -40,9 +40,10 @@ public class MyCourseAdapter extends TBaseRecyclerAdapter<MyCourseResponse.DataB
     }
 
     private static String getTime(long start, long end) {
+        String yymmdd = InputUtils.getDataTime("yyyy-MM-dd", start);
         String startTime = InputUtils.getDataTime("HH:mm", start);
         String endTime = InputUtils.getDataTime("HH:mm", end);
-        return startTime + "-" + endTime;
+        return yymmdd + " " + startTime + "-" + endTime;
     }
 
     @Override
@@ -116,7 +117,6 @@ public class MyCourseAdapter extends TBaseRecyclerAdapter<MyCourseResponse.DataB
                         dialogInterface.dismiss();
                     }
                 });
-
 
 
             }
