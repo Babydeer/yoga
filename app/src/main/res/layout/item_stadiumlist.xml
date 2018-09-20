@@ -19,6 +19,7 @@
         android:layout_alignTop="@+id/ivIcon"
         android:layout_marginStart="40px"
         android:layout_toEndOf="@+id/ivIcon"
+        android:lines="1"
         android:textColor="#333333"
         android:textSize="15sp"
         tools:text="紫音瑜伽馆" />
@@ -31,6 +32,7 @@
         android:layout_marginStart="40px"
         android:layout_marginTop="10px"
         android:layout_toEndOf="@+id/ivIcon"
+        android:lines="1"
         android:textColor="#505050"
         android:textSize="12sp"
         tools:text="南山区科技园建设路453号琴音大厦" />
@@ -42,6 +44,7 @@
         android:layout_alignBottom="@+id/ivIcon"
         android:layout_marginStart="40px"
         android:layout_toEndOf="@+id/ivIcon"
+        android:lines="1"
         android:textColor="#808080"
         android:textSize="10sp"
         tools:text="南油 &#060; 500m" />
